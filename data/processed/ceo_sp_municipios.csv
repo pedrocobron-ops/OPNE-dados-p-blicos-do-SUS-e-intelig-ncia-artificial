@@ -1,0 +1,646 @@
+co_ibge6,no_municipio,co_regiao_saude,no_regiao_saude,ceo_ms,co_ibge7,populacao_2022,ceo_cnes,ceo_rcpd,diverge_ms_cnes
+350010,Adamantina,35091,Adamantina,0.0,3500105,34687,0,0,False
+350020,Adolfo,35156,José Bonifácio,0.0,3500204,4351,0,0,False
+350030,Aguaí,35142,Mantiqueira,0.0,3500303,32072,0,0,False
+350040,Águas da Prata,35142,Mantiqueira,0.0,3500402,7369,0,0,False
+350050,Águas de Lindóia,35074,Circuito das Águas,0.0,3500501,17930,0,0,False
+350055,Águas de Santa Bárbara,35061,Vale do Jurumirim,0.0,3500550,7177,0,0,False
+350060,Águas de São Pedro,35103,Piracicaba,0.0,3500600,2780,0,0,False
+350070,Agudos,35062,Bauru,0.0,3500709,37680,0,0,False
+350075,Alambari,35161,Itapetininga,0.0,3500758,6141,0,0,False
+350080,Alfredo Marcondes,35112,Alta Sorocabana,0.0,3500808,4445,0,0,False
+350090,Altair,35051,Norte - Barretos,0.0,3500907,3451,0,0,False
+350100,Altinópolis,35133,Vale das Cachoeiras,1.0,3501004,16818,1,0,False
+350110,Alto Alegre,35023,Consórcios do DRS II,0.0,3501103,3841,0,0,False
+350115,Alumínio,35163,Sorocaba,0.0,3501152,17301,0,0,False
+350120,Álvares Florence,35157,Votuporanga,0.0,3501202,3915,0,0,False
+350130,Álvares Machado,35112,Alta Sorocabana,0.0,3501301,27255,0,0,False
+350140,Álvaro de Carvalho,35093,Marília,0.0,3501400,4808,0,0,False
+350150,Alvinlândia,35093,Marília,0.0,3501509,2885,0,0,False
+350160,Americana,35072,Região Metropolitana de Campinas,1.0,3501608,237240,1,0,False
+350170,Américo Brasiliense,35031,Central do DRS III ,1.0,3501707,33019,1,1,False
+350180,Américo de Campos,35157,Votuporanga,0.0,3501806,5870,0,0,False
+350190,Amparo,35074,Circuito das Águas,1.0,3501905,68008,1,0,False
+350200,Analândia,35104,Rio Claro,0.0,3502002,4589,0,0,False
+350210,Andradina,35022,Lagos do DRS II,0.0,3502101,59783,0,0,False
+350220,Angatuba,35161,Itapetininga,0.0,3502200,24022,0,0,False
+350230,Anhembi,35063,Polo Cuesta,0.0,3502309,5674,0,0,False
+350240,Anhumas,35112,Alta Sorocabana,0.0,3502408,4023,0,0,False
+350250,Aparecida,35172,Circuito da Fé e Vale Histórico,1.0,3502507,32569,1,1,False
+350260,Aparecida D'Oeste,35153,Jales,0.0,3502606,4086,0,0,False
+350270,Apiaí,35162,Itapeva,1.0,3502705,24585,1,1,False
+350275,Araçariguama,35163,Sorocaba,0.0,3502754,21522,0,0,False
+350280,Araçatuba,35021,Central do DRS II,1.0,3502804,200124,1,0,False
+350290,Araçoiaba da Serra,35163,Sorocaba,0.0,3502903,32443,0,0,False
+350300,Aramina,35083,Alta Mogiana,0.0,3503000,5420,0,0,False
+350310,Arandu,35061,Vale do Jurumirim,0.0,3503109,6885,0,0,False
+350315,Arapeí,35172,Circuito da Fé e Vale Histórico,0.0,3503158,2330,0,0,False
+350320,Araraquara,35031,Central do DRS III ,1.0,3503208,242228,1,1,False
+350330,Araras,35101,Araras,0.0,3503307,130866,0,0,False
+350335,Arco-Íris,35095,Tupã,0.0,3503356,2044,0,0,False
+350340,Arealva,35062,Bauru,0.0,3503406,8130,0,0,False
+350350,Areias,35172,Circuito da Fé e Vale Histórico,0.0,3503505,3577,0,0,False
+350360,Areiópolis,35063,Polo Cuesta,0.0,3503604,10130,0,0,False
+350370,Ariranha,35151,Catanduva,1.0,3503703,7602,1,0,False
+350380,Artur Nogueira,35072,Região Metropolitana de Campinas,0.0,3503802,51456,0,0,False
+350390,Arujá,35011,Alto do Tietê,0.0,3503901,86678,0,0,False
+350395,Aspásia,35153,Jales,0.0,3503950,1842,0,0,False
+350400,Assis,35092,Assis,1.0,3504008,101409,1,0,False
+350410,Atibaia,35071,Bragança,1.0,3504107,158647,1,1,False
+350420,Auriflama,35021,Central do DRS II,0.0,3504206,13692,0,0,False
+350430,Avaí,35062,Bauru,0.0,3504305,4483,0,0,False
+350440,Avanhandava,35023,Consórcios do DRS II,0.0,3504404,11263,0,0,False
+350450,Avaré,35061,Vale do Jurumirim,1.0,3504503,92805,1,0,False
+350460,Bady Bassitt,35155,São José do Rio Preto,0.0,3504602,27260,0,0,False
+350470,Balbinos,35062,Bauru,0.0,3504701,3887,0,0,False
+350480,Bálsamo,35155,São José do Rio Preto,0.0,3504800,9596,0,0,False
+350490,Bananal,35172,Circuito da Fé e Vale Histórico,0.0,3504909,9969,0,0,False
+350500,Barão de Antonina,35061,Vale do Jurumirim,0.0,3505005,3531,0,0,False
+350510,Barbosa,35023,Consórcios do DRS II,0.0,3505104,5640,0,0,False
+350520,Bariri,35064,Jaú,1.0,3505203,31595,1,0,False
+350530,Barra Bonita,35064,Jaú,1.0,3505302,34346,1,0,False
+350535,Barra do Chapéu,35162,Itapeva,0.0,3505351,5179,0,0,False
+350540,Barra do Turvo,35121,Vale do Ribeira,0.0,3505401,6876,0,0,False
+350550,Barretos,35051,Norte - Barretos,1.0,3505500,122485,1,0,False
+350560,Barrinha,35131,Horizonte Verde,0.0,3505609,32092,0,0,False
+350570,Barueri,35014,Rota dos Bandeirantes,1.0,3505708,316473,1,0,False
+350580,Bastos,35095,Tupã,1.0,3505807,21503,1,0,False
+350590,Batatais,35133,Vale das Cachoeiras,1.0,3505906,58402,1,0,False
+350600,Bauru,35062,Bauru,1.0,3506003,379146,1,1,False
+350610,Bebedouro,35052,Sul - Barretos,0.0,3506102,76373,0,0,False
+350620,Bento de Abreu,35021,Central do DRS II,0.0,3506201,2606,0,0,False
+350630,Bernardino de Campos,35094,Ourinhos,0.0,3506300,11607,0,0,False
+350635,Bertioga,35041,Baixada Santista,0.0,3506359,64188,0,0,False
+350640,Bilac,35021,Central do DRS II,0.0,3506409,7319,0,0,False
+350650,Birigui,35023,Consórcios do DRS II,1.0,3506508,118979,1,0,False
+350660,Biritiba Mirim,35011,Alto do Tietê,0.0,3506607,29683,0,0,False
+350670,Boa Esperança do Sul,35031,Central do DRS III ,0.0,3506706,12978,0,0,False
+350680,Bocaina,35064,Jaú,0.0,3506805,11259,0,0,False
+350690,Bofete,35063,Polo Cuesta,0.0,3506904,10460,0,0,False
+350700,Boituva,35163,Sorocaba,0.0,3507001,61081,0,0,False
+350710,Bom Jesus dos Perdões,35071,Bragança,0.0,3507100,22006,0,0,False
+350715,Bom Sucesso de Itararé,35162,Itapeva,0.0,3507159,3555,0,0,False
+350720,Borá,35092,Assis,0.0,3507209,907,0,0,False
+350730,Boracéia,35064,Jaú,0.0,3507308,4715,0,0,False
+350740,Borborema,35033,Noroeste do DRS III ,0.0,3507407,14226,0,0,False
+350745,Borebi,35062,Bauru,0.0,3507456,2713,0,0,False
+350750,Botucatu,35063,Polo Cuesta,1.0,3507506,145155,1,0,False
+350760,Bragança Paulista,35071,Bragança,1.0,3507605,176811,1,1,False
+350770,Braúna,35023,Consórcios do DRS II,0.0,3507704,5356,0,0,False
+350775,Brejo Alegre,35023,Consórcios do DRS II,0.0,3507753,2565,0,0,False
+350780,Brodowski,35133,Vale das Cachoeiras,0.0,3507803,25201,0,0,False
+350790,Brotas,35064,Jaú,0.0,3507902,23898,0,0,False
+350800,Buri,35162,Itapeva,0.0,3508009,20250,0,0,False
+350810,Buritama,35023,Consórcios do DRS II,1.0,3508108,17210,1,0,False
+350820,Buritizal,35083,Alta Mogiana,0.0,3508207,4356,0,0,False
+350830,Cabrália Paulista,35062,Bauru,0.0,3508306,4299,0,0,False
+350840,Cabreúva,35073,Jundiaí,1.0,3508405,47011,1,1,False
+350850,Caçapava,35171,Alto Vale do Paraíba,1.0,3508504,96202,1,1,False
+350860,Cachoeira Paulista,35172,Circuito da Fé e Vale Histórico,1.0,3508603,31564,1,0,False
+350870,Caconde,35143,Rio Pardo,0.0,3508702,17101,0,0,False
+350880,Cafelândia,35065,Lins,0.0,3508801,16654,0,0,False
+350890,Caiabu,35112,Alta Sorocabana,0.0,3508900,3712,0,0,False
+350900,Caieiras,35012,Franco da Rocha,0.0,3509007,95032,0,0,False
+350910,Caiuá,35114,Extremo Oeste Paulista,0.0,3509106,5466,0,0,False
+350920,Cajamar,35012,Franco da Rocha,1.0,3509205,92689,1,0,False
+350925,Cajati,35121,Vale do Ribeira,0.0,3509254,28515,0,0,False
+350930,Cajobi,35051,Norte - Barretos,0.0,3509304,9133,0,0,False
+350940,Cajuru,35133,Vale das Cachoeiras,1.0,3509403,23830,1,0,False
+350945,Campina do Monte Alegre,35161,Itapetininga,0.0,3509452,5954,0,0,False
+350950,Campinas,35072,Região Metropolitana de Campinas,2.0,3509502,1139047,2,0,False
+350960,Campo Limpo Paulista,35073,Jundiaí,0.0,3509601,77632,0,0,False
+350970,Campos do Jordão,35174,Vale do Paraíba/Região Serrana,1.0,3509700,46974,1,1,False
+350980,Campos Novos Paulista,35093,Marília,0.0,3509809,4888,0,0,False
+350990,Cananéia,35121,Vale do Ribeira,0.0,3509908,12289,0,0,False
+350995,Canas,35172,Circuito da Fé e Vale Histórico,0.0,3509957,4931,0,0,False
+351000,Cândido Mota,35092,Assis,0.0,3510005,29449,0,0,False
+351010,Cândido Rodrigues,35033,Noroeste do DRS III ,0.0,3510104,2889,0,0,False
+351015,Canitar,35094,Ourinhos,0.0,3510153,6283,0,0,False
+351020,Capão Bonito,35161,Itapetininga,0.0,3510203,46337,0,0,False
+351030,Capela do Alto,35163,Sorocaba,0.0,3510302,22866,0,0,False
+351040,Capivari,35103,Piracicaba,1.0,3510401,50068,1,0,False
+351050,Caraguatatuba,35173,Litoral Norte,1.0,3510500,134873,1,1,False
+351060,Carapicuíba,35014,Rota dos Bandeirantes,1.0,3510609,386984,2,0,True
+351070,Cardoso,35157,Votuporanga,0.0,3510708,11345,0,0,False
+351080,Casa Branca,35143,Rio Pardo,0.0,3510807,28083,0,0,False
+351090,Cássia dos Coqueiros,35133,Vale das Cachoeiras,0.0,3510906,2799,0,0,False
+351100,Castilho,35022,Lagos do DRS II,0.0,3511003,19977,0,0,False
+351110,Catanduva,35151,Catanduva,1.0,3511102,115791,1,0,False
+351120,Catiguá,35151,Catanduva,0.0,3511201,7003,0,0,False
+351130,Cedral,35155,São José do Rio Preto,0.0,3511300,12618,0,0,False
+351140,Cerqueira César,35061,Vale do Jurumirim,0.0,3511409,21469,0,0,False
+351150,Cerquilho,35161,Itapetininga,1.0,3511508,44695,1,0,False
+351160,Cesário Lange,35161,Itapetininga,0.0,3511607,19048,0,0,False
+351170,Charqueada,35103,Piracicaba,0.0,3511706,15535,0,0,False
+351190,Clementina,35023,Consórcios do DRS II,0.0,3511904,6982,0,0,False
+351200,Colina,35051,Norte - Barretos,0.0,3512001,18486,0,0,False
+351210,Colômbia,35051,Norte - Barretos,0.0,3512100,6629,0,0,False
+351220,Conchal,35101,Araras,0.0,3512209,28101,0,0,False
+351230,Conchas,35063,Polo Cuesta,0.0,3512308,15232,0,0,False
+351240,Cordeirópolis,35102,Limeira,1.0,3512407,24514,1,0,False
+351250,Coroados,35023,Consórcios do DRS II,0.0,3512506,5400,0,0,False
+351260,Coronel Macedo,35061,Vale do Jurumirim,0.0,3512605,4280,0,0,False
+351270,Corumbataí,35104,Rio Claro,0.0,3512704,4195,0,0,False
+351280,Cosmópolis,35072,Região Metropolitana de Campinas,1.0,3512803,59773,1,0,False
+351290,Cosmorama,35157,Votuporanga,0.0,3512902,8719,0,0,False
+351300,Cotia,35013,Mananciais,1.0,3513009,274413,1,0,False
+351310,Cravinhos,35132,Aquífero Guarani,1.0,3513108,33281,1,0,False
+351320,Cristais Paulista,35081,Três Colinas,0.0,3513207,9272,0,0,False
+351330,Cruzália,35092,Assis,0.0,3513306,2108,0,0,False
+351340,Cruzeiro,35172,Circuito da Fé e Vale Histórico,1.0,3513405,74961,1,1,False
+351350,Cubatão,35041,Baixada Santista,1.0,3513504,112476,1,0,False
+351360,Cunha,35172,Circuito da Fé e Vale Histórico,0.0,3513603,22110,0,0,False
+351370,Descalvado,35032,Coração do DRS III ,1.0,3513702,31756,1,1,False
+351380,Diadema,35015,Grande ABC,1.0,3513801,393237,1,1,False
+351385,Dirce Reis,35153,Jales,0.0,3513850,1620,0,0,False
+351390,Divinolândia,35143,Rio Pardo,0.0,3513900,11158,0,0,False
+351400,Dobrada,35033,Noroeste do DRS III ,0.0,3514007,8759,0,0,False
+351410,Dois Córregos,35064,Jaú,0.0,3514106,24510,0,0,False
+351420,Dolcinópolis,35153,Jales,0.0,3514205,2207,0,0,False
+351430,Dourado,35032,Coração do DRS III ,0.0,3514304,8096,0,0,False
+351440,Dracena,35111,Alta Paulista,0.0,3514403,45474,0,0,False
+351450,Duartina,35062,Bauru,0.0,3514502,12328,0,0,False
+351460,Dumont,35131,Horizonte Verde,0.0,3514601,9471,0,0,False
+351470,Echaporã,35093,Marília,0.0,3514700,6205,0,0,False
+351480,Eldorado,35121,Vale do Ribeira,0.0,3514809,13069,0,0,False
+351490,Elias Fausto,35103,Piracicaba,0.0,3514908,17699,0,0,False
+351492,Elisiário,35151,Catanduva,0.0,3514924,3138,0,0,False
+351495,Embaúba,35151,Catanduva,0.0,3514957,2323,0,0,False
+351500,Embu das Artes,35013,Mananciais,2.0,3515004,250691,2,0,False
+351510,Embu-Guaçu,35013,Mananciais,1.0,3515103,66970,1,0,False
+351512,Emilianópolis,35112,Alta Sorocabana,0.0,3515129,3014,0,0,False
+351515,Engenheiro Coelho,35102,Limeira,0.0,3515152,19566,0,0,False
+351518,Espírito Santo do Pinhal,35142,Mantiqueira,0.0,3515186,39816,0,0,False
+351519,Espírito Santo do Turvo,35094,Ourinhos,0.0,3515194,4157,0,0,False
+351520,Estrela D'Oeste,35154,Fernandópolis,0.0,3515202,9417,0,0,False
+351530,Estrela do Norte,35112,Alta Sorocabana,0.0,3515301,2703,0,0,False
+351535,Euclides da Cunha Paulista,35115,Pontal do Paranapanema,0.0,3515350,7924,0,0,False
+351540,Fartura,35061,Vale do Jurumirim,0.0,3515400,16641,0,0,False
+351550,Fernandópolis,35154,Fernandópolis,1.0,3515509,71186,1,1,False
+351560,Fernando Prestes,35151,Catanduva,1.0,3515608,5942,1,0,False
+351565,Fernão,35093,Marília,0.0,3515657,1656,0,0,False
+351570,Ferraz de Vasconcelos,35011,Alto do Tietê,1.0,3515707,179198,1,1,False
+351580,Flora Rica,35111,Alta Paulista,0.0,3515806,1487,0,0,False
+351590,Floreal,35157,Votuporanga,0.0,3515905,2733,0,0,False
+351600,Flórida Paulista,35091,Adamantina,0.0,3516002,12958,0,0,False
+351610,Florínea,35092,Assis,0.0,3516101,3851,0,0,False
+351620,Franca,35081,Três Colinas,0.0,3516200,352536,0,0,False
+351630,Francisco Morato,35012,Franco da Rocha,1.0,3516309,165139,1,0,False
+351640,Franco da Rocha,35012,Franco da Rocha,1.0,3516408,144849,1,0,False
+351650,Gabriel Monteiro,35023,Consórcios do DRS II,0.0,3516507,2763,0,0,False
+351660,Gália,35093,Marília,0.0,3516606,6380,0,0,False
+351670,Garça,35093,Marília,1.0,3516705,42110,1,1,False
+351680,Gastão Vidigal,35157,Votuporanga,0.0,3516804,3252,0,0,False
+351685,Gavião Peixoto,35031,Central do DRS III ,0.0,3516853,4702,0,0,False
+351690,General Salgado,35157,Votuporanga,1.0,3516903,10312,1,0,False
+351700,Getulina,35065,Lins,0.0,3517000,10232,0,0,False
+351710,Glicério,35023,Consórcios do DRS II,0.0,3517109,4138,0,0,False
+351720,Guaiçara,35065,Lins,0.0,3517208,11239,0,0,False
+351730,Guaimbê,35093,Marília,0.0,3517307,5512,0,0,False
+351740,Guaíra,35051,Norte - Barretos,1.0,3517406,39279,1,0,False
+351750,Guapiaçu,35155,São José do Rio Preto,0.0,3517505,21711,0,0,False
+351760,Guapiara,35162,Itapeva,0.0,3517604,17071,0,0,False
+351770,Guará,35083,Alta Mogiana,1.0,3517703,18606,1,1,False
+351780,Guaraçaí,35022,Lagos do DRS II,0.0,3517802,7441,0,0,False
+351790,Guaraci,35051,Norte - Barretos,0.0,3517901,10350,0,0,False
+351800,Guarani D'Oeste,35154,Fernandópolis,0.0,3518008,1968,0,0,False
+351810,Guarantã,35093,Marília,0.0,3518107,6427,0,0,False
+351820,Guararapes,35021,Central do DRS II,0.0,3518206,31043,0,0,False
+351830,Guararema,35011,Alto do Tietê,0.0,3518305,31236,0,0,False
+351840,Guaratinguetá,35172,Circuito da Fé e Vale Histórico,1.0,3518404,118044,1,0,False
+351850,Guareí,35161,Itapetininga,0.0,3518503,15013,0,0,False
+351860,Guariba,35131,Horizonte Verde,1.0,3518602,37498,1,0,False
+351870,Guarujá,35041,Baixada Santista,1.0,3518701,287634,1,0,False
+351880,Guarulhos,35011,Alto do Tietê,4.0,3518800,1291771,4,1,False
+351885,Guatapará,35132,Aquífero Guarani,0.0,3518859,7320,0,0,False
+351890,Guzolândia,35021,Central do DRS II,0.0,3518909,4246,0,0,False
+351900,Herculândia,35095,Tupã,0.0,3519006,9125,0,0,False
+351905,Holambra,35072,Região Metropolitana de Campinas,0.0,3519055,15094,0,0,False
+351907,Hortolândia,35072,Região Metropolitana de Campinas,1.0,3519071,236641,1,1,False
+351910,Iacanga,35062,Bauru,0.0,3519105,10437,0,0,False
+351920,Iacri,35095,Tupã,0.0,3519204,6131,0,0,False
+351925,Iaras,35061,Vale do Jurumirim,0.0,3519253,8010,0,0,False
+351930,Ibaté,35032,Coração do DRS III ,0.0,3519303,32178,0,0,False
+351940,Ibirá,35155,São José do Rio Preto,0.0,3519402,11690,0,0,False
+351950,Ibirarema,35094,Ourinhos,0.0,3519501,6385,0,0,False
+351960,Ibitinga,35033,Noroeste do DRS III ,0.0,3519600,60033,0,0,False
+351970,Ibiúna,35163,Sorocaba,0.0,3519709,75605,0,0,False
+351980,Icém,35155,São José do Rio Preto,0.0,3519808,7819,0,0,False
+351990,Iepê,35113,Alto Capivari,0.0,3519907,7619,0,0,False
+352000,Igaraçu do Tietê,35064,Jaú,1.0,3520004,23106,1,0,False
+352010,Igarapava,35083,Alta Mogiana,1.0,3520103,26212,1,0,False
+352020,Igaratá,35171,Alto Vale do Paraíba,0.0,3520202,10605,0,0,False
+352030,Iguape,35121,Vale do Ribeira,0.0,3520301,29115,0,0,False
+352040,Ilhabela,35173,Litoral Norte,1.0,3520400,34934,1,0,False
+352042,Ilha Comprida,35121,Vale do Ribeira,0.0,3520426,13419,0,0,False
+352044,Ilha Solteira,35022,Lagos do DRS II,0.0,3520442,25549,0,0,False
+352050,Indaiatuba,35072,Região Metropolitana de Campinas,2.0,3520509,255748,2,1,False
+352060,Indiana,35112,Alta Sorocabana,0.0,3520608,5090,0,0,False
+352070,Indiaporã,35154,Fernandópolis,0.0,3520707,4035,0,0,False
+352080,Inúbia Paulista,35091,Adamantina,0.0,3520806,3615,0,0,False
+352090,Ipaussu,35094,Ourinhos,0.0,3520905,13712,0,0,False
+352100,Iperó,35163,Sorocaba,0.0,3521002,36459,0,0,False
+352110,Ipeúna,35104,Rio Claro,0.0,3521101,6831,0,0,False
+352115,Ipiguá,35155,São José do Rio Preto,0.0,3521150,6761,0,0,False
+352120,Iporanga,35121,Vale do Ribeira,0.0,3521200,4046,0,0,False
+352130,Ipuã,35082,Alta Anhanguera,1.0,3521309,14454,1,0,False
+352140,Iracemápolis,35102,Limeira,0.0,3521408,21967,0,0,False
+352150,Irapuã,35151,Catanduva,0.0,3521507,6867,0,0,False
+352160,Irapuru,35111,Alta Paulista,0.0,3521606,7085,0,0,False
+352170,Itaberá,35162,Itapeva,0.0,3521705,17983,0,0,False
+352180,Itaí,35061,Vale do Jurumirim,0.0,3521804,25180,0,0,False
+352190,Itajobi,35151,Catanduva,0.0,3521903,16989,0,0,False
+352200,Itaju,35064,Jaú,0.0,3522000,3618,0,0,False
+352210,Itanhaém,35041,Baixada Santista,1.0,3522109,112476,1,0,False
+352215,Itaóca,35162,Itapeva,0.0,3522158,3422,0,0,False
+352220,Itapecerica da Serra,35013,Mananciais,1.0,3522208,158522,1,1,False
+352230,Itapetininga,35161,Itapetininga,1.0,3522307,157790,1,1,False
+352240,Itapeva,35162,Itapeva,0.0,3522406,89728,0,0,False
+352250,Itapevi,35014,Rota dos Bandeirantes,0.0,3522505,232297,0,0,False
+352260,Itapira,35141,Baixa Mogiana,1.0,3522604,72022,1,1,False
+352265,Itapirapuã Paulista,35162,Itapeva,0.0,3522653,4306,0,0,False
+352270,Itápolis,35033,Noroeste do DRS III ,0.0,3522703,39493,0,0,False
+352280,Itaporanga,35061,Vale do Jurumirim,0.0,3522802,14085,0,0,False
+352290,Itapuí,35064,Jaú,0.0,3522901,13659,0,0,False
+352300,Itapura,35022,Lagos do DRS II,0.0,3523008,3979,0,0,False
+352310,Itaquaquecetuba,35011,Alto do Tietê,0.0,3523107,369275,0,0,False
+352320,Itararé,35162,Itapeva,0.0,3523206,44438,0,0,False
+352330,Itariri,35121,Vale do Ribeira,0.0,3523305,15528,0,0,False
+352340,Itatiba,35072,Região Metropolitana de Campinas,1.0,3523404,121590,1,1,False
+352350,Itatinga,35063,Polo Cuesta,0.0,3523503,19070,0,0,False
+352360,Itirapina,35104,Rio Claro,0.0,3523602,16148,0,0,False
+352370,Itirapuã,35081,Três Colinas,0.0,3523701,5779,0,0,False
+352380,Itobi,35143,Rio Pardo,0.0,3523800,8046,0,0,False
+352390,Itu,35163,Sorocaba,1.0,3523909,168240,1,1,False
+352400,Itupeva,35073,Jundiaí,0.0,3524006,70616,0,0,False
+352410,Ituverava,35083,Alta Mogiana,1.0,3524105,37571,1,0,False
+352420,Jaborandi,35051,Norte - Barretos,0.0,3524204,6221,0,0,False
+352430,Jaboticabal,35131,Horizonte Verde,1.0,3524303,71821,1,0,False
+352440,Jacareí,35171,Alto Vale do Paraíba,1.0,3524402,240275,1,0,False
+352450,Jaci,35156,José Bonifácio,0.0,3524501,7613,0,0,False
+352460,Jacupiranga,35121,Vale do Ribeira,0.0,3524600,16097,0,0,False
+352470,Jaguariúna,35072,Região Metropolitana de Campinas,1.0,3524709,59347,1,1,False
+352480,Jales,35153,Jales,1.0,3524808,48776,1,0,False
+352490,Jambeiro,35171,Alto Vale do Paraíba,0.0,3524907,6397,0,0,False
+352500,Jandira,35014,Rota dos Bandeirantes,1.0,3525003,118045,1,0,False
+352510,Jardinópolis,35132,Aquífero Guarani,0.0,3525102,45282,0,0,False
+352520,Jarinu,35073,Jundiaí,0.0,3525201,37535,0,0,False
+352530,Jaú,35064,Jaú,1.0,3525300,133497,1,0,False
+352540,Jeriquara,35081,Três Colinas,0.0,3525409,3863,0,0,False
+352550,Joanópolis,35071,Bragança,0.0,3525508,12815,0,0,False
+352560,João Ramalho,35113,Alto Capivari,0.0,3525607,4371,0,0,False
+352570,José Bonifácio,35156,José Bonifácio,0.0,3525706,36633,0,0,False
+352580,Júlio Mesquita,35093,Marília,0.0,3525805,4254,0,0,False
+352585,Jumirim,35163,Sorocaba,0.0,3525854,3056,0,0,False
+352590,Jundiaí,35073,Jundiaí,1.0,3525904,443221,1,1,False
+352600,Junqueirópolis,35111,Alta Paulista,1.0,3526001,20448,1,1,False
+352610,Juquiá,35121,Vale do Ribeira,0.0,3526100,17154,0,0,False
+352620,Juquitiba,35013,Mananciais,0.0,3526209,27404,0,0,False
+352630,Lagoinha,35174,Vale do Paraíba/Região Serrana,0.0,3526308,5083,0,0,False
+352640,Laranjal Paulista,35063,Polo Cuesta,0.0,3526407,26261,0,0,False
+352650,Lavínia,35022,Lagos do DRS II,0.0,3526506,9689,0,0,False
+352660,Lavrinhas,35172,Circuito da Fé e Vale Histórico,0.0,3526605,7171,0,0,False
+352670,Leme,35101,Araras,1.0,3526704,98161,1,1,False
+352680,Lençóis Paulista,35062,Bauru,0.0,3526803,66505,0,0,False
+352690,Limeira,35102,Limeira,1.0,3526902,291869,1,0,False
+352700,Lindóia,35074,Circuito das Águas,1.0,3527009,7014,1,1,False
+352710,Lins,35065,Lins,1.0,3527108,74779,1,1,False
+352720,Lorena,35172,Circuito da Fé e Vale Histórico,1.0,3527207,84855,1,1,False
+352725,Lourdes,35023,Consórcios do DRS II,0.0,3527256,1950,0,0,False
+352730,Louveira,35073,Jundiaí,0.0,3527306,51847,0,0,False
+352740,Lucélia,35091,Adamantina,0.0,3527405,20061,0,0,False
+352750,Lucianópolis,35062,Bauru,0.0,3527504,2372,0,0,False
+352760,Luís Antônio,35132,Aquífero Guarani,0.0,3527603,12265,0,0,False
+352770,Luiziânia,35023,Consórcios do DRS II,0.0,3527702,4701,0,0,False
+352780,Lupércio,35093,Marília,0.0,3527801,3981,0,0,False
+352790,Lutécia,35092,Assis,0.0,3527900,2661,0,0,False
+352800,Macatuba,35062,Bauru,1.0,3528007,16829,1,1,False
+352810,Macaubal,35157,Votuporanga,0.0,3528106,7481,0,0,False
+352820,Macedônia,35154,Fernandópolis,0.0,3528205,3963,0,0,False
+352830,Magda,35157,Votuporanga,0.0,3528304,3165,0,0,False
+352840,Mairinque,35163,Sorocaba,1.0,3528403,50027,1,0,False
+352850,Mairiporã,35012,Franco da Rocha,1.0,3528502,93853,1,0,False
+352860,Manduri,35061,Vale do Jurumirim,0.0,3528601,9871,0,0,False
+352870,Marabá Paulista,35114,Extremo Oeste Paulista,0.0,3528700,4573,0,0,False
+352880,Maracaí,35092,Assis,0.0,3528809,12673,0,0,False
+352885,Marapoama,35151,Catanduva,0.0,3528858,3292,0,0,False
+352890,Mariápolis,35091,Adamantina,0.0,3528908,3513,0,0,False
+352900,Marília,35093,Marília,1.0,3529005,237627,1,0,False
+352910,Marinópolis,35153,Jales,0.0,3529104,1860,0,0,False
+352920,Martinópolis,35112,Alta Sorocabana,0.0,3529203,24881,0,0,False
+352930,Matão,35033,Noroeste do DRS III ,1.0,3529302,79033,1,0,False
+352940,Mauá,35015,Grande ABC,1.0,3529401,418261,1,1,False
+352950,Mendonça,35156,José Bonifácio,0.0,3529500,6159,0,0,False
+352960,Meridiano,35154,Fernandópolis,0.0,3529609,4572,0,0,False
+352965,Mesópolis,35153,Jales,0.0,3529658,1952,0,0,False
+352970,Miguelópolis,35083,Alta Mogiana,0.0,3529708,19441,0,0,False
+352980,Mineiros do Tietê,35064,Jaú,0.0,3529807,11230,0,0,False
+352990,Miracatu,35121,Vale do Ribeira,0.0,3529906,18553,0,0,False
+353000,Mira Estrela,35154,Fernandópolis,0.0,3530003,3126,0,0,False
+353010,Mirandópolis,35022,Lagos do DRS II,0.0,3530102,27983,0,0,False
+353020,Mirante do Paranapanema,35115,Pontal do Paranapanema,0.0,3530201,15917,0,0,False
+353030,Mirassol,35155,São José do Rio Preto,1.0,3530300,63337,1,1,False
+353040,Mirassolândia,35155,São José do Rio Preto,0.0,3530409,4669,0,0,False
+353050,Mococa,35143,Rio Pardo,1.0,3530508,67681,1,1,False
+353060,Mogi das Cruzes,35011,Alto do Tietê,0.0,3530607,451505,0,0,False
+353070,Mogi Guaçu,35141,Baixa Mogiana,1.0,3530706,153658,1,1,False
+353080,Mogi Mirim,35141,Baixa Mogiana,1.0,3530805,92558,1,1,False
+353090,Mombuca,35103,Piracicaba,0.0,3530904,3722,0,0,False
+353100,Monções,35157,Votuporanga,0.0,3531001,1937,0,0,False
+353110,Mongaguá,35041,Baixada Santista,0.0,3531100,61951,0,0,False
+353120,Monte Alegre do Sul,35074,Circuito das Águas,0.0,3531209,8627,0,0,False
+353130,Monte Alto,35131,Horizonte Verde,1.0,3531308,47574,1,0,False
+353140,Monte Aprazível,35156,José Bonifácio,0.0,3531407,22280,0,0,False
+353150,Monte Azul Paulista,35052,Sul - Barretos,0.0,3531506,18151,0,0,False
+353160,Monte Castelo,35111,Alta Paulista,0.0,3531605,4222,0,0,False
+353170,Monteiro Lobato,35171,Alto Vale do Paraíba,0.0,3531704,4138,0,0,False
+353180,Monte Mor,35072,Região Metropolitana de Campinas,1.0,3531803,64662,1,1,False
+353190,Morro Agudo,35082,Alta Anhanguera,1.0,3531902,27933,1,0,False
+353200,Morungaba,35072,Região Metropolitana de Campinas,0.0,3532009,13720,0,0,False
+353205,Motuca,35031,Central do DRS III ,0.0,3532058,4034,0,0,False
+353210,Murutinga do Sul,35022,Lagos do DRS II,0.0,3532108,3737,0,0,False
+353215,Nantes,35113,Alto Capivari,0.0,3532157,2660,0,0,False
+353220,Narandiba,35112,Alta Sorocabana,0.0,3532207,5713,0,0,False
+353230,Natividade da Serra,35174,Vale do Paraíba/Região Serrana,0.0,3532306,6999,0,0,False
+353240,Nazaré Paulista,35071,Bragança,0.0,3532405,18217,0,0,False
+353250,Neves Paulista,35155,São José do Rio Preto,0.0,3532504,9699,0,0,False
+353260,Nhandeara,35157,Votuporanga,0.0,3532603,9852,0,0,False
+353270,Nipoã,35156,José Bonifácio,0.0,3532702,4750,0,0,False
+353280,Nova Aliança,35155,São José do Rio Preto,0.0,3532801,6693,0,0,False
+353282,Nova Campina,35162,Itapeva,0.0,3532827,8497,0,0,False
+353284,Nova Canaã Paulista,35152,Santa Fé do Sul,0.0,3532843,2032,0,0,False
+353286,Nova Castilho,35021,Central do DRS II,0.0,3532868,1062,0,0,False
+353290,Nova Europa,35033,Noroeste do DRS III ,0.0,3532900,9311,0,0,False
+353300,Nova Granada,35155,São José do Rio Preto,0.0,3533007,19419,0,0,False
+353310,Nova Guataporanga,35111,Alta Paulista,0.0,3533106,2156,0,0,False
+353320,Nova Independência,35022,Lagos do DRS II,0.0,3533205,4609,0,0,False
+353325,Novais,35151,Catanduva,0.0,3533254,4412,0,0,False
+353330,Nova Luzitânia,35021,Central do DRS II,0.0,3533304,2837,0,0,False
+353340,Nova Odessa,35072,Região Metropolitana de Campinas,0.0,3533403,62019,0,0,False
+353350,Novo Horizonte,35151,Catanduva,1.0,3533502,38324,1,0,False
+353360,Nuporanga,35082,Alta Anhanguera,0.0,3533601,7391,0,0,False
+353370,Ocauçu,35093,Marília,0.0,3533700,4331,0,0,False
+353380,Óleo,35094,Ourinhos,0.0,3533809,2512,0,0,False
+353390,Olímpia,35051,Norte - Barretos,1.0,3533908,55074,1,1,False
+353400,Onda Verde,35155,São José do Rio Preto,0.0,3534005,4771,0,0,False
+353410,Oriente,35093,Marília,0.0,3534104,6085,0,0,False
+353420,Orindiúva,35155,São José do Rio Preto,0.0,3534203,6024,0,0,False
+353430,Orlândia,35082,Alta Anhanguera,1.0,3534302,38319,1,0,False
+353440,Osasco,35014,Rota dos Bandeirantes,1.0,3534401,728615,1,0,False
+353450,Oscar Bressane,35093,Marília,0.0,3534500,2470,0,0,False
+353460,Osvaldo Cruz,35091,Adamantina,1.0,3534609,31272,1,0,False
+353470,Ourinhos,35094,Ourinhos,1.0,3534708,103970,1,0,False
+353475,Ouroeste,35154,Fernandópolis,0.0,3534757,10294,0,0,False
+353480,Ouro Verde,35111,Alta Paulista,0.0,3534807,7779,0,0,False
+353490,Pacaembu,35091,Adamantina,0.0,3534906,14877,0,0,False
+353500,Palestina,35155,São José do Rio Preto,0.0,3535002,11476,0,0,False
+353510,Palmares Paulista,35151,Catanduva,0.0,3535101,9650,0,0,False
+353520,Palmeira D'Oeste,35153,Jales,0.0,3535200,8903,0,0,False
+353530,Palmital,35092,Assis,0.0,3535309,19594,0,0,False
+353540,Panorama,35111,Alta Paulista,0.0,3535408,14964,0,0,False
+353550,Paraguaçu Paulista,35092,Assis,1.0,3535507,41120,1,0,False
+353560,Paraibuna,35171,Alto Vale do Paraíba,0.0,3535606,17667,0,0,False
+353570,Paraíso,35151,Catanduva,0.0,3535705,6099,0,0,False
+353580,Paranapanema,35061,Vale do Jurumirim,0.0,3535804,19395,0,0,False
+353590,Paranapuã,35153,Jales,0.0,3535903,4031,0,0,False
+353600,Parapuã,35095,Tupã,0.0,3536000,10580,0,0,False
+353610,Pardinho,35063,Polo Cuesta,0.0,3536109,7153,0,0,False
+353620,Pariquera-Açu,35121,Vale do Ribeira,0.0,3536208,19233,0,0,False
+353625,Parisi,35157,Votuporanga,0.0,3536257,2892,0,0,False
+353630,Patrocínio Paulista,35081,Três Colinas,0.0,3536307,14512,0,0,False
+353640,Paulicéia,35111,Alta Paulista,0.0,3536406,7955,0,0,False
+353650,Paulínia,35072,Região Metropolitana de Campinas,0.0,3536505,110537,0,0,False
+353657,Paulistânia,35062,Bauru,0.0,3536570,2090,0,0,False
+353660,Paulo de Faria,35155,São José do Rio Preto,0.0,3536604,7400,0,0,False
+353670,Pederneiras,35062,Bauru,1.0,3536703,44827,1,0,False
+353680,Pedra Bela,35071,Bragança,0.0,3536802,6557,0,0,False
+353690,Pedranópolis,35154,Fernandópolis,0.0,3536901,2787,0,0,False
+353700,Pedregulho,35081,Três Colinas,0.0,3537008,15525,0,0,False
+353710,Pedreira,35072,Região Metropolitana de Campinas,0.0,3537107,43112,0,0,False
+353715,Pedrinhas Paulista,35092,Assis,0.0,3537156,2804,0,0,False
+353720,Pedro de Toledo,35121,Vale do Ribeira,0.0,3537206,11281,0,0,False
+353730,Penápolis,35023,Consórcios do DRS II,1.0,3537305,61679,1,0,False
+353740,Pereira Barreto,35022,Lagos do DRS II,1.0,3537404,24095,1,0,False
+353750,Pereiras,35063,Polo Cuesta,0.0,3537503,8737,0,0,False
+353760,Peruíbe,35041,Baixada Santista,1.0,3537602,68352,1,0,False
+353770,Piacatu,35023,Consórcios do DRS II,0.0,3537701,5519,0,0,False
+353780,Piedade,35163,Sorocaba,0.0,3537800,52970,0,0,False
+353790,Pilar do Sul,35163,Sorocaba,0.0,3537909,27619,0,0,False
+353800,Pindamonhangaba,35174,Vale do Paraíba/Região Serrana,1.0,3538006,165428,1,0,False
+353810,Pindorama,35151,Catanduva,0.0,3538105,14542,0,0,False
+353820,Pinhalzinho,35071,Bragança,0.0,3538204,15224,0,0,False
+353830,Piquerobi,35114,Extremo Oeste Paulista,0.0,3538303,3264,0,0,False
+353850,Piquete,35172,Circuito da Fé e Vale Histórico,0.0,3538501,12490,0,0,False
+353860,Piracaia,35071,Bragança,0.0,3538600,26029,0,0,False
+353870,Piracicaba,35103,Piracicaba,2.0,3538709,423323,2,1,False
+353880,Piraju,35061,Vale do Jurumirim,1.0,3538808,29436,1,1,False
+353890,Pirajuí,35062,Bauru,0.0,3538907,22431,0,0,False
+353900,Pirangi,35151,Catanduva,1.0,3539004,10885,1,0,False
+353910,Pirapora do Bom Jesus,35014,Rota dos Bandeirantes,0.0,3539103,18370,0,0,False
+353920,Pirapozinho,35112,Alta Sorocabana,0.0,3539202,25348,0,0,False
+353930,Pirassununga,35101,Araras,0.0,3539301,73545,0,0,False
+353940,Piratininga,35062,Bauru,0.0,3539400,15108,0,0,False
+353950,Pitangueiras,35131,Horizonte Verde,0.0,3539509,33674,0,0,False
+353960,Planalto,35156,José Bonifácio,0.0,3539608,4389,0,0,False
+353970,Platina,35092,Assis,0.0,3539707,3025,0,0,False
+353980,Poá,35011,Alto do Tietê,1.0,3539806,103765,1,1,False
+353990,Poloni,35156,José Bonifácio,0.0,3539905,5592,0,0,False
+354000,Pompéia,35093,Marília,1.0,3540002,20196,1,0,False
+354010,Pongaí,35065,Lins,0.0,3540101,3395,0,0,False
+354020,Pontal,35131,Horizonte Verde,0.0,3540200,37607,0,0,False
+354025,Pontalinda,35153,Jales,0.0,3540259,4127,0,0,False
+354030,Pontes Gestal,35157,Votuporanga,0.0,3540309,2387,0,0,False
+354040,Populina,35154,Fernandópolis,0.0,3540408,4127,0,0,False
+354050,Porangaba,35063,Polo Cuesta,0.0,3540507,10451,0,0,False
+354060,Porto Feliz,35163,Sorocaba,1.0,3540606,56497,1,0,False
+354070,Porto Ferreira,35032,Coração do DRS III ,1.0,3540705,52649,1,0,False
+354075,Potim,35172,Circuito da Fé e Vale Histórico,0.0,3540754,20392,0,0,False
+354080,Potirendaba,35155,São José do Rio Preto,0.0,3540804,18496,0,0,False
+354085,Pracinha,35091,Adamantina,0.0,3540853,2578,0,0,False
+354090,Pradópolis,35131,Horizonte Verde,0.0,3540903,17078,0,0,False
+354100,Praia Grande,35041,Baixada Santista,0.0,3541000,349935,0,0,False
+354105,Pratânia,35063,Polo Cuesta,0.0,3541059,5126,0,0,False
+354110,Presidente Alves,35062,Bauru,0.0,3541109,3804,0,0,False
+354120,Presidente Bernardes,35112,Alta Sorocabana,0.0,3541208,14490,0,0,False
+354130,Presidente Epitácio,35114,Extremo Oeste Paulista,0.0,3541307,39505,0,0,False
+354140,Presidente Prudente,35112,Alta Sorocabana,1.0,3541406,225668,1,0,False
+354150,Presidente Venceslau,35114,Extremo Oeste Paulista,0.0,3541505,35201,0,0,False
+354160,Promissão,35065,Lins,0.0,3541604,35131,0,0,False
+354165,Quadra,35161,Itapetininga,0.0,3541653,3405,0,0,False
+354170,Quatá,35113,Alto Capivari,0.0,3541703,13163,0,0,False
+354180,Queiroz,35095,Tupã,0.0,3541802,3265,0,0,False
+354190,Queluz,35172,Circuito da Fé e Vale Histórico,1.0,3541901,9159,1,0,False
+354200,Quintana,35093,Marília,1.0,3542008,7038,1,1,False
+354210,Rafard,35103,Piracicaba,0.0,3542107,8965,0,0,False
+354220,Rancharia,35113,Alto Capivari,0.0,3542206,28588,0,0,False
+354230,Redenção da Serra,35174,Vale do Paraíba/Região Serrana,0.0,3542305,4494,0,0,False
+354240,Regente Feijó,35112,Alta Sorocabana,0.0,3542404,20145,0,0,False
+354250,Reginópolis,35062,Bauru,0.0,3542503,7662,0,0,False
+354260,Registro,35121,Vale do Ribeira,1.0,3542602,59947,1,1,False
+354270,Restinga,35081,Três Colinas,0.0,3542701,6404,0,0,False
+354280,Ribeira,35162,Itapeva,0.0,3542800,3132,0,0,False
+354290,Ribeirão Bonito,35032,Coração do DRS III ,0.0,3542909,10989,0,0,False
+354300,Ribeirão Branco,35162,Itapeva,0.0,3543006,18627,0,0,False
+354310,Ribeirão Corrente,35081,Três Colinas,0.0,3543105,4608,0,0,False
+354320,Ribeirão do Sul,35094,Ourinhos,0.0,3543204,4677,0,0,False
+354323,Ribeirão dos Índios,35112,Alta Sorocabana,0.0,3543238,2025,0,0,False
+354325,Ribeirão Grande,35161,Itapetininga,0.0,3543253,7450,0,0,False
+354330,Ribeirão Pires,35015,Grande ABC,1.0,3543303,115559,1,1,False
+354340,Ribeirão Preto,35132,Aquífero Guarani,1.0,3543402,698642,1,1,False
+354350,Riversul,35162,Itapeva,0.0,3543501,5599,0,0,False
+354360,Rifaina,35081,Três Colinas,1.0,3543600,4049,1,0,False
+354370,Rincão,35031,Central do DRS III ,0.0,3543709,9098,0,0,False
+354380,Rinópolis,35095,Tupã,0.0,3543808,9259,0,0,False
+354390,Rio Claro,35104,Rio Claro,1.0,3543907,201418,1,0,False
+354400,Rio das Pedras,35103,Piracicaba,0.0,3544004,31328,0,0,False
+354410,Rio Grande da Serra,35015,Grande ABC,0.0,3544103,44170,0,0,False
+354420,Riolândia,35157,Votuporanga,0.0,3544202,10309,0,0,False
+354425,Rosana,35115,Pontal do Paranapanema,0.0,3544251,17440,0,0,False
+354430,Roseira,35172,Circuito da Fé e Vale Histórico,0.0,3544301,10832,0,0,False
+354440,Rubiácea,35021,Central do DRS II,0.0,3544400,2700,0,0,False
+354450,Rubinéia,35152,Santa Fé do Sul,0.0,3544509,3833,0,0,False
+354460,Sabino,35065,Lins,0.0,3544608,5112,0,0,False
+354470,Sagres,35091,Adamantina,0.0,3544707,2474,0,0,False
+354480,Sales,35151,Catanduva,0.0,3544806,6437,0,0,False
+354490,Sales Oliveira,35082,Alta Anhanguera,0.0,3544905,11411,0,0,False
+354500,Salesópolis,35011,Alto do Tietê,0.0,3545001,15202,0,0,False
+354510,Salmourão,35091,Adamantina,0.0,3545100,4808,0,0,False
+354515,Saltinho,35103,Piracicaba,0.0,3545159,8161,0,0,False
+354520,Salto,35163,Sorocaba,1.0,3545209,134319,1,0,False
+354530,Salto de Pirapora,35163,Sorocaba,0.0,3545308,43748,0,0,False
+354540,Salto Grande,35094,Ourinhos,0.0,3545407,9050,0,0,False
+354550,Sandovalina,35112,Alta Sorocabana,0.0,3545506,3645,0,0,False
+354560,Santa Adélia,35151,Catanduva,0.0,3545605,14018,0,0,False
+354570,Santa Albertina,35153,Jales,0.0,3545704,6393,0,0,False
+354580,Santa Bárbara D'Oeste,35072,Região Metropolitana de Campinas,1.0,3545803,183347,1,1,False
+354600,Santa Branca,35171,Alto Vale do Paraíba,0.0,3546009,13975,0,0,False
+354610,Santa Clara D'Oeste,35152,Santa Fé do Sul,0.0,3546108,2598,0,0,False
+354620,Santa Cruz da Conceição,35101,Araras,0.0,3546207,4277,0,0,False
+354625,Santa Cruz da Esperança,35133,Vale das Cachoeiras,0.0,3546256,2116,0,0,False
+354630,Santa Cruz das Palmeiras,35142,Mantiqueira,0.0,3546306,28864,0,0,False
+354640,Santa Cruz do Rio Pardo,35094,Ourinhos,1.0,3546405,46442,1,0,False
+354650,Santa Ernestina,35033,Noroeste do DRS III ,0.0,3546504,6118,0,0,False
+354660,Santa Fé do Sul,35152,Santa Fé do Sul,1.0,3546603,34794,1,0,False
+354670,Santa Gertrudes,35104,Rio Claro,1.0,3546702,23611,1,0,False
+354680,Santa Isabel,35011,Alto do Tietê,0.0,3546801,53174,0,0,False
+354690,Santa Lúcia,35031,Central do DRS III ,0.0,3546900,7149,0,0,False
+354700,Santa Maria da Serra,35103,Piracicaba,0.0,3547007,5243,0,0,False
+354710,Santa Mercedes,35111,Alta Paulista,0.0,3547106,2956,0,0,False
+354720,Santana da Ponte Pensa,35153,Jales,0.0,3547205,1670,0,0,False
+354730,Santana de Parnaíba,35014,Rota dos Bandeirantes,1.0,3547304,154105,1,0,False
+354740,Santa Rita D'Oeste,35152,Santa Fé do Sul,0.0,3547403,2733,0,0,False
+354750,Santa Rita do Passa Quatro,35132,Aquífero Guarani,0.0,3547502,24833,0,0,False
+354760,Santa Rosa de Viterbo,35132,Aquífero Guarani,0.0,3547601,23411,0,0,False
+354765,Santa Salete,35153,Jales,0.0,3547650,1645,0,0,False
+354770,Santo Anastácio,35112,Alta Sorocabana,0.0,3547700,17963,0,0,False
+354780,Santo André,35015,Grande ABC,2.0,3547809,748919,2,2,False
+354790,Santo Antônio da Alegria,35133,Vale das Cachoeiras,0.0,3547908,6775,0,0,False
+354800,Santo Antônio de Posse,35072,Região Metropolitana de Campinas,0.0,3548005,23244,0,0,False
+354805,Santo Antônio do Aracanguá,35021,Central do DRS II,0.0,3548054,8379,0,0,False
+354810,Santo Antônio do Jardim,35142,Mantiqueira,0.0,3548104,6126,0,0,False
+354820,Santo Antônio do Pinhal,35174,Vale do Paraíba/Região Serrana,1.0,3548203,7133,1,1,False
+354830,Santo Expedito,35112,Alta Sorocabana,0.0,3548302,3000,0,0,False
+354840,Santópolis do Aguapeí,35023,Consórcios do DRS II,0.0,3548401,3899,0,0,False
+354850,Santos,35041,Baixada Santista,2.0,3548500,418608,2,0,False
+354860,São Bento do Sapucaí,35174,Vale do Paraíba/Região Serrana,0.0,3548609,11674,0,0,False
+354870,São Bernardo do Campo,35015,Grande ABC,3.0,3548708,810729,3,3,False
+354880,São Caetano do Sul,35015,Grande ABC,1.0,3548807,165655,1,1,False
+354890,São Carlos,35032,Coração do DRS III ,1.0,3548906,254857,1,1,False
+354900,São Francisco,35153,Jales,0.0,3549003,2602,0,0,False
+354910,São João da Boa Vista,35142,Mantiqueira,1.0,3549102,92547,1,0,False
+354920,São João das Duas Pontes,35154,Fernandópolis,0.0,3549201,2580,0,0,False
+354925,São João de Iracema,35154,Fernandópolis,0.0,3549250,1846,0,0,False
+354930,São João do Pau D'Alho,35111,Alta Paulista,0.0,3549300,2242,0,0,False
+354940,São Joaquim da Barra,35082,Alta Anhanguera,0.0,3549409,48558,0,0,False
+354950,São José da Bela Vista,35081,Três Colinas,0.0,3549508,7626,0,0,False
+354960,São José do Barreiro,35172,Circuito da Fé e Vale Histórico,0.0,3549607,3853,0,0,False
+354970,São José do Rio Pardo,35143,Rio Pardo,1.0,3549706,52205,1,1,False
+354980,São José do Rio Preto,35155,São José do Rio Preto,2.0,3549805,480393,2,2,False
+354990,São José dos Campos,35171,Alto Vale do Paraíba,0.0,3549904,697054,0,0,False
+354995,São Lourenço da Serra,35013,Mananciais,0.0,3549953,16067,0,0,False
+355000,São Luís do Paraitinga,35174,Vale do Paraíba/Região Serrana,0.0,3550001,10337,0,0,False
+355010,São Manuel,35063,Polo Cuesta,0.0,3550100,37289,0,0,False
+355020,São Miguel Arcanjo,35161,Itapetininga,0.0,3550209,32039,0,0,False
+355030,São Paulo,35016,São Paulo,30.0,3550308,11451999,30,28,False
+355040,São Pedro,35103,Piracicaba,0.0,3550407,38256,0,0,False
+355050,São Pedro do Turvo,35094,Ourinhos,0.0,3550506,7217,0,0,False
+355060,São Roque,35163,Sorocaba,1.0,3550605,79484,1,0,False
+355070,São Sebastião,35173,Litoral Norte,1.0,3550704,81595,1,0,False
+355080,São Sebastião da Grama,35143,Rio Pardo,0.0,3550803,10441,0,0,False
+355090,São Simão,35132,Aquífero Guarani,0.0,3550902,13442,0,0,False
+355100,São Vicente,35041,Baixada Santista,2.0,3551009,329911,2,0,False
+355110,Sarapuí,35161,Itapetininga,0.0,3551108,10369,0,0,False
+355120,Sarutaiá,35061,Vale do Jurumirim,0.0,3551207,3704,0,0,False
+355130,Sebastianópolis do Sul,35157,Votuporanga,0.0,3551306,3130,0,0,False
+355140,Serra Azul,35132,Aquífero Guarani,0.0,3551405,12746,0,0,False
+355150,Serrana,35132,Aquífero Guarani,1.0,3551504,43909,1,0,False
+355160,Serra Negra,35074,Circuito das Águas,0.0,3551603,29894,0,0,False
+355170,Sertãozinho,35131,Horizonte Verde,2.0,3551702,126887,2,2,False
+355180,Sete Barras,35121,Vale do Ribeira,0.0,3551801,12730,0,0,False
+355190,Severínia,35051,Norte - Barretos,0.0,3551900,14576,0,0,False
+355200,Silveiras,35172,Circuito da Fé e Vale Histórico,0.0,3552007,6186,0,0,False
+355210,Socorro,35071,Bragança,0.0,3552106,40122,0,0,False
+355220,Sorocaba,35163,Sorocaba,1.0,3552205,723682,1,0,False
+355230,Sud Mennucci,35022,Lagos do DRS II,0.0,3552304,7355,0,0,False
+355240,Sumaré,35072,Região Metropolitana de Campinas,1.0,3552403,279545,1,0,False
+355250,Suzano,35011,Alto do Tietê,1.0,3552502,307429,1,1,False
+355255,Suzanápolis,35022,Lagos do DRS II,0.0,3552551,3408,0,0,False
+355260,Tabapuã,35151,Catanduva,1.0,3552601,11323,1,0,False
+355270,Tabatinga,35033,Noroeste do DRS III ,0.0,3552700,14769,0,0,False
+355280,Taboão da Serra,35013,Mananciais,1.0,3552809,273542,1,0,False
+355290,Taciba,35112,Alta Sorocabana,0.0,3552908,6260,0,0,False
+355300,Taguaí,35061,Vale do Jurumirim,0.0,3553005,12669,0,0,False
+355310,Taiaçu,35052,Sul - Barretos,0.0,3553104,5677,0,0,False
+355320,Taiúva,35052,Sul - Barretos,0.0,3553203,6548,0,0,False
+355330,Tambaú,35142,Mantiqueira,0.0,3553302,21435,0,0,False
+355340,Tanabi,35155,São José do Rio Preto,0.0,3553401,25265,0,0,False
+355350,Tapiraí,35163,Sorocaba,0.0,3553500,7996,0,0,False
+355360,Tapiratiba,35143,Rio Pardo,0.0,3553609,11816,0,0,False
+355365,Taquaral,35052,Sul - Barretos,0.0,3553658,2619,0,0,False
+355370,Taquaritinga,35033,Noroeste do DRS III ,1.0,3553708,52260,1,0,False
+355380,Taquarituba,35061,Vale do Jurumirim,0.0,3553807,24350,0,0,False
+355385,Taquarivaí,35162,Itapeva,0.0,3553856,6876,0,0,False
+355390,Tarabai,35112,Alta Sorocabana,0.0,3553906,6536,0,0,False
+355395,Tarumã,35092,Assis,0.0,3553955,14882,0,0,False
+355400,Tatuí,35161,Itapetininga,1.0,3554003,123942,1,1,False
+355410,Taubaté,35174,Vale do Paraíba/Região Serrana,1.0,3554102,310739,1,1,False
+355420,Tejupá,35061,Vale do Jurumirim,0.0,3554201,4127,0,0,False
+355430,Teodoro Sampaio,35115,Pontal do Paranapanema,0.0,3554300,22173,0,0,False
+355440,Terra Roxa,35052,Sul - Barretos,0.0,3554409,7904,0,0,False
+355450,Tietê,35163,Sorocaba,0.0,3554508,37663,0,0,False
+355460,Timburi,35094,Ourinhos,0.0,3554607,2464,0,0,False
+355465,Torre de Pedra,35063,Polo Cuesta,0.0,3554656,2046,0,0,False
+355470,Torrinha,35064,Jaú,0.0,3554706,9335,0,0,False
+355475,Trabiju,35031,Central do DRS III ,0.0,3554755,1682,0,0,False
+355480,Tremembé,35174,Vale do Paraíba/Região Serrana,0.0,3554805,51173,0,0,False
+355490,Três Fronteiras,35152,Santa Fé do Sul,0.0,3554904,6804,0,0,False
+355495,Tuiuti,35071,Bragança,0.0,3554953,6778,0,0,False
+355500,Tupã,35095,Tupã,1.0,3555000,63928,1,0,False
+355510,Tupi Paulista,35111,Alta Paulista,0.0,3555109,15854,0,0,False
+355520,Turiúba,35023,Consórcios do DRS II,0.0,3555208,1818,0,0,False
+355530,Turmalina,35154,Fernandópolis,0.0,3555307,1669,0,0,False
+355535,Ubarana,35156,José Bonifácio,0.0,3555356,5365,0,0,False
+355540,Ubatuba,35173,Litoral Norte,1.0,3555406,92981,1,0,False
+355550,Ubirajara,35093,Marília,0.0,3555505,5132,0,0,False
+355560,Uchoa,35155,São José do Rio Preto,0.0,3555604,10394,0,0,False
+355570,União Paulista,35156,José Bonifácio,0.0,3555703,1603,0,0,False
+355580,Urânia,35153,Jales,1.0,3555802,8833,1,1,False
+355590,Uru,35065,Lins,0.0,3555901,1387,0,0,False
+355600,Urupês,35151,Catanduva,0.0,3556008,13744,0,0,False
+355610,Valentim Gentil,35157,Votuporanga,0.0,3556107,14098,0,0,False
+355620,Valinhos,35072,Região Metropolitana de Campinas,1.0,3556206,126373,1,1,False
+355630,Valparaíso,35021,Central do DRS II,1.0,3556305,24241,1,0,False
+355635,Vargem,35071,Bragança,0.0,3556354,10512,0,0,False
+355640,Vargem Grande do Sul,35142,Mantiqueira,1.0,3556404,40133,1,1,False
+355645,Vargem Grande Paulista,35013,Mananciais,0.0,3556453,50415,0,0,False
+355650,Várzea Paulista,35073,Jundiaí,1.0,3556503,115771,1,1,False
+355660,Vera Cruz,35093,Marília,0.0,3556602,10176,0,0,False
+355670,Vinhedo,35072,Região Metropolitana de Campinas,1.0,3556701,76540,1,0,False
+355680,Viradouro,35052,Sul - Barretos,1.0,3556800,17414,1,0,False
+355690,Vista Alegre do Alto,35052,Sul - Barretos,0.0,3556909,8109,0,0,False
+355695,Vitória Brasil,35153,Jales,0.0,3556958,1794,0,0,False
+355700,Votorantim,35163,Sorocaba,1.0,3557006,127923,1,0,False
+355710,Votuporanga,35157,Votuporanga,1.0,3557105,96634,1,0,False
+355715,Zacarias,35156,José Bonifácio,0.0,3557154,2692,0,0,False
+355720,Chavantes,35094,Ourinhos,0.0,3557204,12211,0,0,False
+355730,Estiva Gerbi,35141,Baixa Mogiana,0.0,3557303,11295,0,0,False
