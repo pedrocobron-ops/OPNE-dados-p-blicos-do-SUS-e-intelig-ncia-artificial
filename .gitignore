@@ -1,0 +1,7 @@
+# Arquivos grandes, regeneráveis pelos scripts
+data/raw/BASE_DE_DADOS_CNES_*.ZIP
+data/raw/tbEstabelecimento*.csv
+data/raw/habilitacoes/
+data/interim/sp_estab.csv
+__pycache__/
+.venv/
