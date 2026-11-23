@@ -30,9 +30,9 @@ CODIGO = "PP-06"
 TITULO = ("ACCESS TO SPECIALIZED DENTAL CARE FOR PERSONS WITH DISABILITIES IN SÃO PAULO: "
           "PUBLIC DATA AND ARTIFICIAL INTELLIGENCE")
 # Preencher antes do envio
-AUTORES = [("Francisco Perinni", "1"), ("Pedro Amaral", "2"), ("[Nome da orientadora]", "3")]
-AFILIACOES = "¹[Instituição, Cidade – UF].  ²[Instituição, Cidade – UF].  ³[Instituição, Cidade – UF]."
-EMAIL = "[e-mail do autor principal]"
+AUTORES = [("Francisco Perinni", "1"), ("Pedro Amaral", ""), ("Danielen Abrão", "1"), ("Fabiana Martins", "1")]
+AFILIACOES = "¹Universidade de São Paulo (USP), São Paulo – SP."
+EMAIL = "fpnetto@usp.br"
 
 MARGEM = 0.74
 LARGURA = 15.752 - 2 * MARGEM
