@@ -1,0 +1,492 @@
+<title>Porta Certa</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* Layout: app de uma coluna (máx. 480px), telas trocadas pela barra inferior; um passo por tela no questionário */
+:root {
+  --bg: #F1F5F4; --surface: #FFFFFF; --ink: #15302F; --muted: #4C6462; --line: #D3DFDD;
+  --teal: #0F6E6E; --teal-ink: #FFFFFF; --teal-weak: #DCEDEB;
+  --amber: #C9730F; --amber-weak: #FBEAD3;
+  --red: #A8261E; --red-weak: #FBE3E1;
+  --font: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --nav-h: 64px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0E1918; --surface: #162524; --ink: #E4EFEE; --muted: #9BB2B0; --line: #29403E;
+  --teal: #4DB3AC; --teal-ink: #062120; --teal-weak: #173836;
+  --amber: #F0A847; --amber-weak: #3A2A12;
+  --red: #F2B8B5; --red-weak: #3D1C1A; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0E1918; --surface: #162524; --ink: #E4EFEE; --muted: #9BB2B0; --line: #29403E;
+  --teal: #4DB3AC; --teal-ink: #062120; --teal-weak: #173836;
+  --amber: #F0A847; --amber-weak: #3A2A12;
+  --red: #F2B8B5; --red-weak: #3D1C1A; color-scheme: dark }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 17px; line-height: 1.45; }
+.app { max-width: 480px; margin: 0 auto; min-height: 100%;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 12px calc(var(--nav-h) + 24px + env(safe-area-inset-bottom, 0px)); }
+h1, h2, h3 { line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: 1.65rem; } h2 { font-size: 1.3rem; } h3 { font-size: 1.05rem; }
+p { margin: 0; }
+button, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+a { color: var(--teal); }
+
+.topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 4px 12px; }
+.marca { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem; }
+.marca svg { width: 30px; height: 30px; flex: none; }
+.selo { font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--amber); background: var(--amber-weak); padding: 3px 8px; border-radius: 99px; font-weight: 700; white-space: nowrap; }
+
+.tela { display: flex; flex-direction: column; gap: 16px; }
+.bloco { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.muted { color: var(--muted); }
+.pequeno { font-size: .86rem; }
+.rotulo { font-size: .78rem; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+
+.abertura { padding: 20px 18px; border-radius: 18px; background: var(--teal); color: var(--teal-ink); display: flex; flex-direction: column; gap: 14px; }
+.abertura p { opacity: .92; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 12px 18px; border-radius: 12px; border: 0; font-weight: 700; text-align: center; text-decoration: none; }
+.btn-claro { background: var(--surface); color: var(--teal); }
+.btn-principal { background: var(--teal); color: var(--teal-ink); }
+.btn-borda { background: transparent; border: 2px solid var(--teal); color: var(--teal); }
+.btn-bloco { width: 100%; }
+.btn:disabled { opacity: .45; cursor: default; }
+
+.casos { display: grid; gap: 10px; }
+.caso { text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.caso strong { font-size: 1rem; }
+.atalhos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.atalho { text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; text-align: left; display: flex; flex-direction: column; gap: 6px; min-height: 96px; }
+.atalho svg { width: 26px; height: 26px; color: var(--teal); }
+
+/* Questionário */
+.progresso { display: flex; gap: 6px; }
+.progresso span { flex: 1; height: 6px; border-radius: 99px; background: var(--line); }
+.progresso span.feito { background: var(--teal); }
+.opcoes { display: grid; gap: 10px; }
+.opcao { text-align: left; background: var(--surface); border: 2px solid var(--line); border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px; min-height: 56px; }
+.opcao[aria-pressed="true"] { border-color: var(--teal); background: var(--teal-weak); }
+.opcao small { color: var(--muted); font-size: .86rem; }
+.navq { display: flex; gap: 10px; }
+.navq .btn { flex: 1; }
+
+/* Resultado */
+.nivel { border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 8px; border: 2px solid; }
+.nivel.n1 { background: var(--teal-weak); border-color: var(--teal); }
+.nivel.n2 { background: var(--teal-weak); border-color: var(--teal); }
+.nivel.n3 { background: var(--amber-weak); border-color: var(--amber); }
+.nivel.urg { background: var(--red-weak); border-color: var(--red); }
+.nivel .etiqueta { font-weight: 700; font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; }
+.caminho { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.caminho li { display: grid; grid-template-columns: 30px 1fr; gap: 10px; padding-bottom: 14px; position: relative; }
+.caminho li::before { content: ""; position: absolute; left: 14px; top: 30px; bottom: 0; width: 2px; background: var(--line); }
+.caminho li:last-child { padding-bottom: 0; }
+.caminho li:last-child::before { display: none; }
+.caminho .n { width: 30px; height: 30px; border-radius: 50%; background: var(--teal); color: var(--teal-ink); display: grid; place-items: center; font-weight: 700; font-size: .9rem; }
+.caminho li.voce .n { background: var(--amber); color: var(--teal-ink); }
+
+/* Serviços */
+.filtros { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { border: 2px solid var(--line); background: var(--surface); border-radius: 99px; padding: 8px 14px; font-size: .92rem; font-weight: 700; min-height: 44px; }
+.chip[aria-pressed="true"] { border-color: var(--teal); background: var(--teal-weak); color: var(--ink); }
+.campo { display: flex; flex-direction: column; gap: 6px; }
+.campo select { min-height: 48px; border-radius: 12px; border: 2px solid var(--line); background: var(--surface); padding: 8px 12px; }
+.mapa { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+.mapa svg { display: block; width: 100%; height: auto; max-height: 52vh; }
+.mapa .cidade { fill: var(--teal-weak); stroke: var(--teal); stroke-width: 3; }
+.mapa .p-ceo { fill: var(--teal); stroke: var(--surface); stroke-width: 3; }
+.mapa .p-ceo.sem { fill: var(--surface); stroke: var(--teal); stroke-width: 4; }
+.mapa .p-hosp { fill: var(--amber); stroke: var(--surface); stroke-width: 3; }
+.mapa .voce { fill: var(--red); stroke: var(--surface); stroke-width: 4; }
+.mapa .sel { stroke: var(--ink); stroke-width: 6; }
+.legenda { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .82rem; color: var(--muted); padding: 6px 4px 2px; }
+.legenda i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
+.lista { display: flex; flex-direction: column; gap: 10px; }
+.servico { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; }
+.servico.ativo { border-color: var(--teal); box-shadow: 0 0 0 2px var(--teal); }
+.servico .linha1 { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+.servico h3 { min-width: 0; }
+.dist { white-space: nowrap; font-weight: 700; color: var(--teal); font-variant-numeric: tabular-nums; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-size: .75rem; font-weight: 700; padding: 3px 8px; border-radius: 99px; background: var(--teal-weak); color: var(--ink); }
+.tag.amb { background: var(--amber-weak); }
+.acoes { display: flex; flex-wrap: wrap; gap: 8px; }
+.acoes .btn { min-height: 44px; padding: 8px 14px; font-size: .92rem; }
+
+/* Teleconsulta */
+.horarios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.horarios .chip { width: 100%; }
+.aviso { border-left: 4px solid var(--amber); background: var(--amber-weak); padding: 12px 14px; border-radius: 10px; font-size: .9rem; }
+
+/* Assistente */
+.chat { display: flex; flex-direction: column; gap: 10px; }
+.msg { max-width: 88%; padding: 10px 14px; border-radius: 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.msg.eu { align-self: flex-end; background: var(--teal); color: var(--teal-ink); border-bottom-right-radius: 4px; }
+.msg.ia { align-self: flex-start; background: var(--surface); border: 1px solid var(--line); border-bottom-left-radius: 4px; }
+.sugestoes { display: flex; flex-wrap: wrap; gap: 8px; }
+.sugestoes .chip { font-weight: 400; text-align: left; }
+.enviar { display: flex; gap: 8px; align-items: flex-end; }
+.enviar textarea { flex: 1; min-width: 0; min-height: 52px; max-height: 140px; resize: vertical; border-radius: 12px; border: 2px solid var(--line); background: var(--surface); padding: 12px; font: inherit; color: var(--ink); }
+
+.dicas { display: flex; flex-direction: column; gap: 10px; }
+.dicas details { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+.dicas summary { font-weight: 700; cursor: pointer; min-height: 28px; }
+.dicas details p { margin-top: 8px; }
+
+nav.barra { position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; background: var(--surface); border-top: 1px solid var(--line);
+  padding-bottom: env(safe-area-inset-bottom, 0px); padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px); }
+nav.barra .itens { max-width: 480px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
+nav.barra a { height: var(--nav-h); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: var(--muted); font-size: .76rem; font-weight: 700; }
+nav.barra a svg { width: 24px; height: 24px; }
+nav.barra a[aria-current="page"] { color: var(--teal); }
+.rodape { font-size: .8rem; color: var(--muted); text-align: center; padding-top: 6px; }
+@media (prefers-reduced-motion: no-preference) { .tela { animation: entra .18s ease-out; } @keyframes entra { from { transform: translateY(6px); } to { transform: none; } } }
+</style>
+
+<div class="app">
+  <header class="topo">
+    <div class="marca" aria-label="Porta Certa">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="3" width="18" height="26" rx="3" fill="var(--teal)"/><path d="M23 3 L28 6 V26 L23 29 Z" fill="var(--amber)"/><circle cx="19" cy="17" r="1.8" fill="var(--surface)"/></svg>
+      Porta Certa
+    </div>
+    <span class="selo">Protótipo</span>
+  </header>
+
+  <main id="conteudo"></main>
+  <p class="rodape">Dados: CNES (set/2026) e SIH/SUS (set/2025–ago/2026), município de São Paulo. Regras de orientação em validação pela equipe clínica.</p>
+</div>
+
+<nav class="barra" aria-label="Navegação principal">
+  <div class="itens">
+    <a href="#inicio" data-nav="inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Início</a>
+    <a href="#orientacao" data-nav="orientacao"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>Orientação</a>
+    <a href="#servicos" data-nav="servicos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Serviços</a>
+    <a href="#assistente" data-nav="assistente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8M8 13h5"/></svg>Assistente</a>
+  </div>
+</nav>
+
+<script>
+const SERVICOS = [{"id": "2072270", "tipo": "ceo", "nome": "CEO III Prof Alfredo Reis Viegas", "porte": "CEO III", "rcpd": true, "endereco": "Rua Humaita, 520", "bairro": "Bela Vista", "telefone": "(11)52392084", "lat": -23.55801, "lon": -46.6421, "x": 172.3, "y": 208.0}, {"id": "2786621", "tipo": "ceo", "nome": "CEO II LRPD Dr. Humberto Nastari", "porte": "CEO II", "rcpd": true, "endereco": "Estrada do Alvarenga, 257", "bairro": "Pedreira", "telefone": "52376870 /52376876", "lat": -23.70362, "lon": -46.64399, "x": 170.6, "y": 353.6}, {"id": "3257797", "tipo": "ceo", "nome": "CEO I Lapa", "porte": "CEO II", "rcpd": true, "endereco": "Avenida Doutor Arnaldo, 925", "bairro": "Cerqueira Cesar", "telefone": "11 93960-7116", "lat": -23.55313, "lon": -46.67345, "x": 143.6, "y": 203.1}, {"id": "3382613", "tipo": "ceo", "nome": "CEO II Penha Dr. Wilson Ferreira do Vale", "porte": "CEO II", "rcpd": true, "endereco": "Rua Dr. Edgar Garcia Vieira, 130", "bairro": "Vila Matilde", "telefone": "(11)26515123", "lat": -23.53555, "lon": -46.53302, "x": 272.3, "y": 185.5}, {"id": "4072928", "tipo": "ceo", "nome": "CEO II Capao Redondo", "porte": "CEO II", "rcpd": true, "endereco": "Avenida Comendador Santanna, 542", "bairro": "Capao Redondo", "telefone": "11 5128-6930", "lat": -23.66976, "lon": -46.77312, "x": 52.2, "y": 319.8}, {"id": "5012600", "tipo": "ceo", "nome": "CEO III Parelheiros Yvette Ranzani Viegas", "porte": "CEO III", "rcpd": true, "endereco": "Estrada do Engenheiro Marsilac, 1047", "bairro": "Parelheiros", "telefone": "(11) 5193-0951", "lat": -23.8936, "lon": -46.79978, "x": 27.7, "y": 543.6}, {"id": "5380197", "tipo": "ceo", "nome": "CEO III Visconde de Itauna", "porte": "CEO III", "rcpd": true, "endereco": "Rua Lino Coutinho, 841", "bairro": "Ipiranga", "telefone": "51087275", "lat": -23.59252, "lon": -46.60241, "x": 208.7, "y": 242.5}, {"id": "7382413", "tipo": "ceo", "nome": "CEO III Alto da Boa Vista", "porte": "CEO III", "rcpd": false, "endereco": "Rua Ministro Roberto Cardoso Alves, 386", "bairro": "Alto da Boa Vista", "telefone": "11 55419671", "lat": -23.65005, "lon": -46.69902, "x": 120.1, "y": 300.1}, {"id": "7975414", "tipo": "ceo", "nome": "CEO II Itaquera", "porte": "CEO I", "rcpd": true, "endereco": "Rua Andreas Amon, 150", "bairro": "Jose Bonifacio", "telefone": "(11)5237-8410", "lat": -23.55346, "lon": -46.43671, "x": 360.6, "y": 203.5}, {"id": "7975430", "tipo": "ceo", "nome": "CEO II Cidade Tiradentes", "porte": "CEO II", "rcpd": true, "endereco": "R Fernando Ganga, 14", "bairro": "Cidade Tiradentes", "telefone": "(11) 5237-2760", "lat": -23.60114, "lon": -46.39867, "x": 395.5, "y": 251.1}, {"id": "7975449", "tipo": "ceo", "nome": "CEO II Guaianases", "porte": "CEO II", "rcpd": true, "endereco": "R Macabu, 35", "bairro": "Jardim Sao Carlos", "telefone": "(11) 5237-2622", "lat": -23.55785, "lon": -46.41546, "x": 380.1, "y": 207.8}, {"id": "7975457", "tipo": "ceo", "nome": "CEO II Campo Limpo", "porte": "CEO II", "rcpd": true, "endereco": "Rua Francisco Soares, 81", "bairro": "Jd Inga", "telefone": "(11) 5237-5125", "lat": -23.6381, "lon": -46.74956, "x": 73.8, "y": 288.1}, {"id": "7975465", "tipo": "ceo", "nome": "CEO II Capela do Socorro", "porte": "CEO II", "rcpd": true, "endereco": "Rua Sao Caetano do Sul, 381", "bairro": "Grajau", "telefone": "(11) 5193-0980", "lat": -23.75306, "lon": -46.67802, "x": 139.4, "y": 403.1}, {"id": "7975473", "tipo": "ceo", "nome": "CEO III Sao Miguel", "porte": "CEO III", "rcpd": true, "endereco": "Rua Joao Augusto de Morais, 348", "bairro": "Sao Miguel Paulista", "telefone": "(11) 5237-8420", "lat": -23.49694, "lon": -46.44066, "x": 357.0, "y": 146.9}, {"id": "7979355", "tipo": "ceo", "nome": "CEO II Sao Mateus", "porte": "CEO II", "rcpd": true, "endereco": "Rua Senador Maynarde Gomes, S/N", "bairro": "Jd Tiete", "telefone": "(11) 5237-8700", "lat": -23.58729, "lon": -46.49209, "x": 309.9, "y": 237.3}, {"id": "7979363", "tipo": "ceo", "nome": "CEO II Ermelino Matarazzo", "porte": "CEO II", "rcpd": true, "endereco": "Rua Jose Goes Nogueira, 70", "bairro": "Vl Paranagua", "telefone": "(11)5237-5813", "lat": -23.49505, "lon": -46.47412, "x": 326.3, "y": 145.0}, {"id": "7987846", "tipo": "ceo", "nome": "CEO II Ipiranga", "porte": "CEO II", "rcpd": true, "endereco": "Ru Xavier de Almeida, 210", "bairro": "Ipiranga", "telefone": "52378400", "lat": -23.58771, "lon": -46.60865, "x": 203.0, "y": 237.7}, {"id": "7988141", "tipo": "ceo", "nome": "CEO II Vila Bertioga", "porte": "CEO II", "rcpd": true, "endereco": "Rua Farol Paulistano, 410", "bairro": "Alto da Mooca", "telefone": "11- 5237-0763", "lat": -23.5709, "lon": -46.57561, "x": 233.3, "y": 220.9}, {"id": "7988176", "tipo": "ceo", "nome": "CEO II Santana", "porte": "CEO II", "rcpd": true, "endereco": "Av Nova Cantareira, 1467", "bairro": "Tucuruvi", "telefone": "11 52379860", "lat": -23.549, "lon": -46.631, "x": 182.5, "y": 199.0}, {"id": "7999100", "tipo": "ceo", "nome": "CEO II Pirituba", "porte": "CEO II", "rcpd": true, "endereco": "Rua Marcela Alves de Cassia, 175", "bairro": "Jardim Jaragua", "telefone": "(11) 5239-2730", "lat": -23.48898, "lon": -46.76188, "x": 62.5, "y": 139.0}, {"id": "9008438", "tipo": "ceo", "nome": "CEO II M'Boi Mirim", "porte": "CEO II", "rcpd": true, "endereco": "Rua Manoel Bordalo Pinheiro, 100", "bairro": "Parque Sto Antonio", "telefone": "5108-7295/5108-7298", "lat": -23.65787, "lon": -46.75632, "x": 67.6, "y": 307.9}, {"id": "9010211", "tipo": "ceo", "nome": "CEO II Butanta", "porte": "CEO II", "rcpd": true, "endereco": "Rua Joao Guerra, 0247", "bairro": "Jd Peri Peri", "telefone": "11 5239-0205", "lat": -23.586, "lon": -46.732, "x": 89.9, "y": 236.0}, {"id": "9010238", "tipo": "ceo", "nome": "CEO II Casa Verde", "porte": "CEO II", "rcpd": true, "endereco": "Rua Mourao Vieira, 11", "bairro": "Casa Verde", "telefone": "5237-4160", "lat": -23.50929, "lon": -46.66409, "x": 152.1, "y": 159.3}, {"id": "9014721", "tipo": "ceo", "nome": "CEO II Freguesia do O Brasilandia", "porte": "CEO II", "rcpd": true, "endereco": "Rua Rui de Moraes Apocalipse, 02", "bairro": "Jardim do Tiro", "telefone": "(11)39217759", "lat": -23.47297, "lon": -46.68849, "x": 129.8, "y": 123.0}, {"id": "9021701", "tipo": "ceo", "nome": "CEO II Sapopemba", "porte": "CEO II", "rcpd": true, "endereco": "Rua Joao Lopes de Lima, 1151", "bairro": "Sapopemba", "telefone": "(11) 5239-0000", "lat": -23.61419, "lon": -46.50271, "x": 300.1, "y": 264.2}, {"id": "9021752", "tipo": "ceo", "nome": "CEO II Vila Carrao", "porte": "CEO II", "rcpd": true, "endereco": "Rua Doutor Jacy Barbosa, 280", "bairro": "Vila Carrao", "telefone": "(11) 5239-2923", "lat": -23.55292, "lon": -46.52487, "x": 279.8, "y": 202.9}, {"id": "9026517", "tipo": "ceo", "nome": "CEO II Jabaquara", "porte": "CEO II", "rcpd": true, "endereco": "Av Eng Armando de Arruda Pereira, 2944", "bairro": "Vila do Encontro", "telefone": "(11) 5239-1840", "lat": -23.65195, "lon": -46.63815, "x": 175.9, "y": 302.0}, {"id": "9026525", "tipo": "ceo", "nome": "CEO I Vila Mariana", "porte": "CEO I", "rcpd": true, "endereco": "Rua Sao Samuel, 70", "bairro": "Vila Mariana", "telefone": "5193-1995", "lat": -23.5477, "lon": -46.63498, "x": 178.8, "y": 197.7}, {"id": "9144161", "tipo": "ceo", "nome": "CEO II Vera Cruz M'Boi Mirim", "porte": "CEO II", "rcpd": false, "endereco": "Avenida dos Funcionarios Publicos, 379", "bairro": "Jardim Vera Cruz", "telefone": "(11) 5832-5790", "lat": -23.55052, "lon": -46.63331, "x": 180.4, "y": 200.5}, {"id": "9282394", "tipo": "ceo", "nome": "CEO II Vila Maria Vila Guilherme", "porte": "CEO II", "rcpd": true, "endereco": "Rua Padre Marcos Simoni, 390", "bairro": "Vila Ede", "telefone": "(11) 5283-8600", "lat": -23.49047, "lon": -46.59148, "x": 218.7, "y": 140.5}, {"id": "2069008", "tipo": "hospital", "nome": "Ambulatorio de Especialidades Dr. Geraldo Paulo Bourroul", "internacoes": 175, "endereco": "Rua Martins Fontes, 208", "bairro": "Centro", "telefone": "(11) 2141-6200", "lat": -23.54897, "lon": -46.64447, "x": 170.1, "y": 199.0}, {"id": "6479200", "tipo": "hospital", "nome": "AME Dr. Luiz Roberto Barradas Barata Sao Paulo", "internacoes": 171, "endereco": "Avenida Almirante Delamare, 1534", "bairro": "Cidade Nova Heliopol", "telefone": "(11) 2065-1550", "lat": -23.5939, "lon": -46.5982, "x": 212.6, "y": 243.9}, {"id": "2078015", "tipo": "hospital", "nome": "HC da FMUSP Hospital das Clinicas Sao Paulo", "internacoes": 143, "endereco": "Rua Dr. Ovidio Pires de Campos, 225", "bairro": "Cerqueira Cesar", "telefone": "(11)3087-5456", "lat": -23.55659, "lon": -46.67233, "x": 144.6, "y": 206.6}, {"id": "2088495", "tipo": "hospital", "nome": "Instituto Dante Pazzanese de Cardiologia IDPC Sao Paulo", "internacoes": 111, "endereco": "Av Dr. Dante Pazzanese, 500", "bairro": "Ibirapuera", "telefone": "(11) 5549-1538", "lat": -23.58554, "lon": -46.65095, "x": 164.2, "y": 235.5}, {"id": "2751976", "tipo": "hospital", "nome": "Hospital Dia Sao Miguel Dr. Tito Lopes da Silva", "internacoes": 110, "endereco": "Rua Joao Augusto de Morais, 348", "bairro": "Sao Miguel Paulista", "telefone": "(11) 5237-2798", "lat": -23.49683, "lon": -46.44053, "x": 357.1, "y": 146.8}, {"id": "7378394", "tipo": "hospital", "nome": "Hospital Dia M'Boi Mirim II Vera Cruz", "internacoes": 93, "endereco": "Avenida dos Funcionarios Publicos, 379", "bairro": "Jardim Vera Cruz", "telefone": "11 51087630", "lat": -23.73327, "lon": -46.78342, "x": 42.7, "y": 383.3}, {"id": "7979649", "tipo": "hospital", "nome": "Hospital Dia Vila Guilherme", "internacoes": 85, "endereco": "R Joao Ventura Batista, 615", "bairro": "Vila Guilherme", "telefone": "(11) 5283-8549", "lat": -23.51624, "lon": -46.60534, "x": 206.0, "y": 166.2}, {"id": "2066572", "tipo": "hospital", "nome": "Hospital Heliopolis Unidade de Gestao Assistencial I", "internacoes": 66, "endereco": "Con Xavier, 276", "bairro": "V Heliopolis", "telefone": "", "lat": -23.60712, "lon": -46.59525, "x": 215.3, "y": 257.1}, {"id": "2071371", "tipo": "hospital", "nome": "Hospital Infantil Darcy Vargas UGA III Sao Paulo", "internacoes": 64, "endereco": "Rua Dr. Serafico de Assis Carvalho, 34", "bairro": "Jardim Guedala", "telefone": "(11) 3723-3700", "lat": -23.59285, "lon": -46.71094, "x": 109.2, "y": 242.8}, {"id": "2786680", "tipo": "hospital", "nome": "Hosp Mun Fernando Mauro Pires da Rocha", "internacoes": 30, "endereco": "Estrada de Itapecerica, 1661", "bairro": "Campo Limpo", "telefone": "(11)33947460", "lat": -23.5329, "lon": -46.75968, "x": 64.5, "y": 182.9}, {"id": "2081970", "tipo": "hospital", "nome": "Hosp Mun Jabaquara Artur Ribeiro de Saboya", "internacoes": 23, "endereco": "Avenida Francisco de Paula Quintanilha Ribeiro, 860", "bairro": "Jabaquara", "telefone": "", "lat": -23.65364, "lon": -46.64505, "x": 169.6, "y": 303.6}, {"id": "2089696", "tipo": "hospital", "nome": "Hospital GRAACC Instituto de Oncologia Pediatrica IOP", "internacoes": 16, "endereco": "Rua Pedro de Toledo, 572", "bairro": "Vila Clementino", "telefone": "(11)50808400", "lat": -23.59815, "lon": -46.64602, "x": 168.7, "y": 248.1}, {"id": "2071568", "tipo": "hospital", "nome": "HC da FMUSP Instituto do Coracao InCor Sao Paulo", "internacoes": 10, "endereco": "Avenida Dr. Eneas de Carvalho Aguiar, 44", "bairro": "Cerqueira Cesar", "telefone": "(11) 2661-5000", "lat": -23.56739, "lon": -46.57038, "x": 238.1, "y": 217.4}, {"id": "2076926", "tipo": "hospital", "nome": "Hospital Universitario da USP Sao Paulo", "internacoes": 9, "endereco": "Av Prof Lineu Prestes, 2565", "bairro": "Butanta", "telefone": "(11) 3091-9316", "lat": -23.56492, "lon": -46.74095, "x": 81.7, "y": 214.9}, {"id": "2082225", "tipo": "hospital", "nome": "Hospital Katia de Souza Rodrigues Taipassp Sao Paulo", "internacoes": 2, "endereco": "Av Elisio Teixeira Leite, 6999", "bairro": "Parada de Taipas", "telefone": "(11) 3973-0416", "lat": -23.4769, "lon": -46.7293, "x": 92.3, "y": 126.9}, {"id": "2077485", "tipo": "hospital", "nome": "Hospital Sao Paulo Hospital de Ensino da UNIFESP", "internacoes": 2, "endereco": "Napoleao de Barros, 715", "bairro": "Vl Clementina", "telefone": "", "lat": -23.59778, "lon": -46.64353, "x": 171.0, "y": 247.8}, {"id": "2088517", "tipo": "hospital", "nome": "Hospital Infantil Candido Fontoura Sao Paulo", "internacoes": 2, "endereco": "Rua Siqueira Bueno, 1757", "bairro": "Agua Rasa", "telefone": "(11) 2603-5343", "lat": -23.55192, "lon": -46.58521, "x": 224.5, "y": 201.9}, {"id": "6123740", "tipo": "hospital", "nome": "Instituto do Cancer do Estado de Sao Paulo", "internacoes": 1, "endereco": "Av Dr. Arnaldo, 251", "bairro": "Cerqueira Cesar", "telefone": "38932000", "lat": -23.55613, "lon": -46.66817, "x": 148.4, "y": 206.1}, {"id": "9465464", "tipo": "hospital", "nome": "Hosp Mun Josanias Castanha Braga", "internacoes": 1, "endereco": "Rua Euzebio Coghi, 841", "bairro": "Jardim Roschel", "telefone": "", "lat": -23.82646, "lon": -46.7306, "x": 91.2, "y": 476.5}];
+const CONTORNO = "M200.0,617.8 L204.9,607.3 L204.4,594.8 L194.4,535.2 L195.4,512.0 L181.0,501.1 L178.7,488.5 L179.9,479.5 L188.5,468.8 L190.0,436.2 L169.2,407.2 L163.9,381.0 L177.4,375.3 L195.9,360.5 L181.8,346.4 L179.8,338.0 L186.7,309.6 L196.0,308.0 L197.7,310.3 L220.1,298.9 L226.1,291.0 L224.8,285.3 L229.9,254.5 L234.0,251.1 L249.4,261.8 L258.6,256.1 L271.0,264.4 L283.0,264.0 L296.9,275.8 L315.9,273.0 L323.5,276.2 L328.0,288.8 L354.8,293.9 L365.4,291.1 L375.0,293.7 L388.1,281.8 L387.0,276.9 L396.0,269.0 L399.1,262.5 L398.5,252.2 L409.8,249.5 L414.9,237.8 L409.4,227.8 L410.4,213.0 L402.7,209.7 L400.5,202.2 L405.1,197.2 L400.1,187.2 L401.4,180.5 L418.9,161.4 L425.1,162.2 L426.3,153.8 L410.9,122.1 L406.5,124.7 L406.9,129.7 L397.4,134.2 L389.2,129.4 L383.2,120.5 L370.0,122.0 L367.0,125.8 L338.8,133.0 L321.0,126.9 L292.4,128.8 L271.5,143.4 L259.5,156.4 L248.4,157.1 L245.7,150.0 L247.7,139.7 L246.0,122.8 L238.0,108.8 L242.7,91.5 L239.8,82.4 L242.4,77.4 L241.5,65.4 L250.9,59.6 L251.2,47.4 L260.8,37.0 L261.2,26.8 L268.6,19.1 L270.1,13.3 L262.8,7.5 L255.1,7.7 L239.8,25.7 L228.3,26.9 L210.7,38.2 L211.4,45.1 L205.6,48.0 L197.8,61.7 L179.5,79.3 L175.5,77.3 L158.5,80.5 L146.9,68.6 L139.6,65.6 L133.2,69.3 L132.6,75.5 L118.8,72.5 L111.4,66.5 L109.5,56.5 L101.0,53.7 L99.3,46.3 L91.2,43.9 L86.7,38.1 L70.2,39.3 L63.7,36.0 L54.8,38.7 L54.3,47.2 L42.1,49.7 L40.3,55.0 L26.2,45.6 L20.6,49.3 L6.4,51.0 L3.5,58.9 L9.4,67.9 L6.1,72.4 L17.0,86.9 L22.6,112.5 L26.9,120.4 L31.2,112.9 L39.4,115.7 L50.6,114.4 L50.3,121.8 L55.2,126.8 L58.4,141.3 L67.9,145.0 L60.5,156.4 L74.7,173.7 L64.2,179.2 L64.0,205.0 L52.2,220.1 L40.3,224.5 L31.9,232.5 L21.6,234.0 L19.3,248.4 L20.4,259.1 L61.3,248.0 L72.6,252.8 L71.1,260.5 L63.9,264.9 L55.8,277.1 L34.2,297.2 L31.6,320.3 L26.1,335.4 L29.2,348.7 L34.2,350.5 L34.5,371.3 L28.9,379.1 L31.2,389.1 L42.9,398.8 L55.1,402.9 L53.9,413.6 L38.4,423.8 L35.8,430.0 L37.9,437.6 L26.5,459.8 L43.6,463.2 L61.8,477.9 L60.2,492.6 L51.8,493.8 L46.3,501.4 L49.5,505.4 L49.0,542.6 L38.8,544.8 L26.7,542.8 L16.9,557.8 L21.2,588.2 L40.7,592.3 L68.9,625.4 L58.3,641.7 L53.2,657.7 L61.7,656.0 L68.8,646.8 L80.1,641.9 L91.4,645.5 L100.0,643.0 L105.6,646.2 L111.8,641.0 L119.9,640.3 L126.5,634.4 L134.5,632.4 L141.8,639.4 L154.2,638.2 L165.2,651.6 L173.9,647.8 L180.6,638.0 L178.2,627.3 L194.4,617.8 L200.0,617.8Z";
+const VIEWBOX = "0 0 431 660";
+const PROJ = { lon0: -46.83, lat1: -23.35, cos: 0.917, esc: 1000 };
+
+const REGIOES = {
+  centro: { nome: "Centro", lat: -23.5505, lon: -46.6333 },
+  norte: { nome: "Zona Norte", lat: -23.4800, lon: -46.6300 },
+  leste: { nome: "Zona Leste", lat: -23.5450, lon: -46.4800 },
+  sul: { nome: "Zona Sul", lat: -23.6800, lon: -46.7000 },
+  oeste: { nome: "Zona Oeste", lat: -23.5700, lon: -46.7300 },
+};
+
+const PERGUNTAS = [
+  { id: "quem", titulo: "Para quem é o atendimento?", opcoes: [
+    { v: "crianca", t: "Criança", d: "Até 12 anos" },
+    { v: "adolescente", t: "Adolescente", d: "13 a 17 anos" },
+    { v: "adulto", t: "Adulto ou idoso", d: "18 anos ou mais" } ] },
+  { id: "situacao", titulo: "O que está acontecendo agora?", opcoes: [
+    { v: "urgencia", t: "Dor forte, inchaço no rosto ou sangramento que não para", d: "Precisa de atenção hoje" },
+    { v: "rotina", t: "Consulta, limpeza ou avaliação", d: "Sem dor forte no momento" },
+    { v: "tratamento", t: "Precisa de tratamento", d: "Cárie, canal, extração, gengiva" },
+    { v: "encaminhado", t: "Já tenho encaminhamento de um dentista", d: "Guia ou pedido por escrito" } ] },
+  { id: "cadeira", titulo: "Na cadeira do dentista, a pessoa consegue…", opcoes: [
+    { v: "sim", t: "Ficar sentada e colaborar", d: "Mesmo com algum medo" },
+    { v: "ajuda", t: "Colaborar com ajuda ou adaptações", d: "Precisa de tempo, contenção leve ou ambiente calmo" },
+    { v: "nao", t: "Não consegue ser atendida acordada", d: "Agitação intensa, movimentos involuntários ou medo extremo" } ] },
+  { id: "tentou", titulo: "Já tentou tratamento em um Centro de Especialidades (CEO) sem conseguir terminar?", opcoes: [
+    { v: "sim", t: "Sim, tentou e não conseguiu" },
+    { v: "nao", t: "Não, ainda não" } ] },
+  { id: "regiao", titulo: "Em que região da cidade vocês estão?", opcoes: Object.entries(REGIOES).map(([v, r]) => ({ v, t: r.nome })) },
+];
+
+const CASOS = [
+  { nome: "Lucas, 8 anos", desc: "Autismo. Não aceita a cadeira; tentou tratar cáries no CEO sem sucesso.",
+    resp: { quem: "crianca", situacao: "tratamento", cadeira: "nao", tentou: "sim", regiao: "leste" } },
+  { nome: "Dona Lúcia, 74 anos", desc: "Alzheimer leve. Precisa extrair um dente; colabora com calma e paciência.",
+    resp: { quem: "adulto", situacao: "tratamento", cadeira: "ajuda", tentou: "nao", regiao: "sul" } },
+  { nome: "Ana, 5 anos", desc: "Síndrome de Down. Primeira consulta, sem dor.",
+    resp: { quem: "crianca", situacao: "rotina", cadeira: "sim", tentou: "nao", regiao: "norte" } },
+];
+
+const estado = { passo: 0, resp: {}, filtro: "rcpd", regiaoServ: "centro", selecionado: null, chat: [], caso: null };
+
+// Regras provisórias de orientação — a validar pela equipe clínica.
+function nivel(r) {
+  if (r.situacao === "urgencia") return "urg";
+  if (r.cadeira === "nao" && (r.tentou === "sim" || r.situacao === "encaminhado")) return "n3";
+  if (r.cadeira === "nao") return "n2";
+  if (r.situacao === "tratamento" || r.situacao === "encaminhado" || r.cadeira === "ajuda") return "n2";
+  return "n1";
+}
+
+const NIVEIS = {
+  urg: { etiqueta: "Atenção hoje", titulo: "Procure atendimento de urgência",
+    texto: "Dor forte, inchaço no rosto ou sangramento que não para precisam de avaliação no mesmo dia. Procure a UBS mais próxima (acolhimento) ou um pronto-socorro. Se houver dificuldade para respirar ou engolir, ligue 192 (SAMU).",
+    caminho: ["Hoje: UBS (acolhimento) ou pronto-socorro", "Depois da urgência: avaliação na UBS", "Se precisar: encaminhamento ao CEO"], voce: 0 },
+  n1: { etiqueta: "Atenção básica", titulo: "Comece pela Unidade Básica de Saúde (UBS)",
+    texto: "A equipe de saúde bucal da UBS faz a consulta, a limpeza e o acompanhamento. Se for preciso um tratamento especializado, ela encaminha para o Centro de Especialidades Odontológicas (CEO).",
+    caminho: ["UBS: consulta e cuidados de rotina", "Se precisar: encaminhamento ao CEO com atendimento à pessoa com deficiência", "Casos que não podem ser tratados acordados: hospital"], voce: 0 },
+  n2: { etiqueta: "Atenção especializada", titulo: "O caso indica um CEO da Rede de Cuidados à Pessoa com Deficiência",
+    texto: "Esses centros têm estrutura e equipe para atender pessoas com deficiência. O acesso é por encaminhamento: peça na UBS o encaminhamento para um CEO com atendimento a pacientes com necessidades especiais.",
+    caminho: ["UBS: peça o encaminhamento", "CEO da Rede de Cuidados à Pessoa com Deficiência", "Se não for possível tratar acordado: CEO encaminha ao hospital"], voce: 1 },
+  n3: { etiqueta: "Atenção hospitalar", titulo: "O caso pode precisar de tratamento sob anestesia geral",
+    texto: "Quando o tratamento não é possível na cadeira, ele é feito em hospital, com o paciente sedado. O acesso é pelo encaminhamento do CEO, por meio da regulação. Leve ao CEO o histórico das tentativas anteriores.",
+    caminho: ["CEO: avaliação e pedido de tratamento hospitalar", "Regulação do SUS: agendamento", "Hospital: tratamento sob anestesia geral"], voce: 0 },
+};
+
+const $ = (s, el = document) => el.querySelector(s);
+const esc = (t) => String(t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+function distKm(a, b) {
+  const R = 6371, rad = (x) => x * Math.PI / 180;
+  const dLat = rad(b.lat - a.lat), dLon = rad(b.lon - a.lon);
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(dLon / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+const xy = (p) => ({ x: (p.lon - PROJ.lon0) * PROJ.cos * PROJ.esc, y: (PROJ.lat1 - p.lat) * PROJ.esc });
+
+function ordenados(regiao, filtro) {
+  const ref = REGIOES[regiao];
+  return SERVICOS.filter((s) => filtro === "todos" || (filtro === "rcpd" && s.tipo === "ceo" && s.rcpd) || (filtro === "hospital" && s.tipo === "hospital"))
+    .map((s) => ({ ...s, km: distKm(ref, s) }))
+    .sort((a, b) => filtro === "hospital" ? b.internacoes - a.internacoes : a.km - b.km);
+}
+
+function cartao(s, extra = "") {
+  const tags = s.tipo === "ceo"
+    ? `<span class="tag">${esc(s.porte)}</span>${s.rcpd ? '<span class="tag">Rede da Pessoa com Deficiência</span>' : '<span class="tag amb">Fora da Rede da Pessoa com Deficiência</span>'}`
+    : `<span class="tag amb">Hospital</span><span class="tag">${s.internacoes} tratamentos sob anestesia/ano</span>`;
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${s.lat},${s.lon}`;
+  return `<article class="servico ${estado.selecionado === s.id ? "ativo" : ""}" id="s-${s.id}">
+    <div class="linha1"><h3>${esc(s.nome)}</h3>${s.km != null ? `<span class="dist">${s.km.toFixed(1).replace(".", ",")} km</span>` : ""}</div>
+    <div class="tags">${tags}</div>
+    <p class="pequeno muted">${esc(s.endereco)} · ${esc(s.bairro)}</p>
+    ${s.telefone ? `<p class="pequeno">Telefone: <strong>${esc(s.telefone)}</strong></p>` : ""}
+    ${s.tipo === "hospital" ? '<p class="pequeno muted">Acesso somente por encaminhamento do CEO, via regulação.</p>' : ""}
+    <div class="acoes"><a class="btn btn-borda" href="${mapsUrl}" target="_blank" rel="noopener">Como chegar</a>${extra}</div>
+  </article>`;
+}
+
+function mapaSvg(lista, regiao) {
+  const ref = xy(REGIOES[regiao]);
+  const pts = lista.map((s) => s.tipo === "ceo"
+    ? `<circle class="p-ceo ${s.rcpd ? "" : "sem"} ${estado.selecionado === s.id ? "sel" : ""}" cx="${s.x}" cy="${s.y}" r="11" data-id="${s.id}"><title>${esc(s.nome)}</title></circle>`
+    : `<rect class="p-hosp ${estado.selecionado === s.id ? "sel" : ""}" x="${s.x - 10}" y="${s.y - 10}" width="20" height="20" transform="rotate(45 ${s.x} ${s.y})" data-id="${s.id}"><title>${esc(s.nome)}</title></rect>`).join("");
+  return `<div class="mapa"><svg viewBox="${VIEWBOX}" role="img" aria-label="Mapa do município de São Paulo com os serviços">
+    <path class="cidade" d="${CONTORNO}"/>${pts}
+    <circle class="voce" cx="${ref.x}" cy="${ref.y}" r="13"><title>Sua região</title></circle></svg>
+    <div class="legenda"><span><i style="background:var(--teal)"></i>CEO na Rede</span><span><i style="border:2px solid var(--teal)"></i>CEO fora da Rede</span><span><i style="background:var(--amber);border-radius:2px"></i>Hospital</span><span><i style="background:var(--red)"></i>Sua região</span></div></div>`;
+}
+
+/* ---------- Telas ---------- */
+function telaInicio() {
+  return `<section class="tela">
+    <div class="abertura">
+      <h1>Encontre o lugar certo para o atendimento odontológico</h1>
+      <p>Para famílias e cuidadores de pessoas com deficiência no SUS. Responda 5 perguntas e veja qual serviço tem mais chance de resolver o caso.</p>
+      <a class="btn btn-claro" href="#orientacao" data-acao="novo">Começar orientação</a>
+    </div>
+    <div class="bloco">
+      <span class="rotulo">Casos de exemplo</span>
+      <p class="pequeno muted">Toque em um caso para ver o caminho completo, com as respostas já preenchidas.</p>
+      <div class="casos">${CASOS.map((c, i) => `<button class="caso" data-caso="${i}"><strong>${esc(c.nome)}</strong><span class="pequeno muted">${esc(c.desc)}</span></button>`).join("")}</div>
+    </div>
+    <div class="atalhos">
+      <a class="atalho" href="#servicos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><strong>Serviços perto de você</strong><span class="pequeno muted">30 CEO e 19 hospitais</span></a>
+      <a class="atalho" href="#cuidados"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 3c-2.5 0-4 2-4 4.5 0 3 1.2 5 2 8 .5 2 1 5.5 2.5 5.5s1.5-4 3.5-4 2 4 3.5 4 2-3.5 2.5-5.5c.8-3 2-5 2-8C20 5 18.5 3 16 3c-1.6 0-2.6 1-4 1S9.6 3 8 3z"/></svg><strong>Cuidados em casa</strong><span class="pequeno muted">Escovação e prevenção</span></a>
+    </div>
+  </section>`;
+}
+
+function telaPergunta() {
+  const q = PERGUNTAS[estado.passo];
+  const marcada = estado.resp[q.id];
+  return `<section class="tela">
+    <div class="progresso" aria-hidden="true">${PERGUNTAS.map((_, i) => `<span class="${i <= estado.passo ? "feito" : ""}"></span>`).join("")}</div>
+    <span class="rotulo">Pergunta ${estado.passo + 1} de ${PERGUNTAS.length}</span>
+    <h2>${esc(q.titulo)}</h2>
+    <div class="opcoes" role="group" aria-label="${esc(q.titulo)}">${q.opcoes.map((o) => `<button class="opcao" data-resp="${o.v}" aria-pressed="${marcada === o.v}"><strong>${esc(o.t)}</strong>${o.d ? `<small>${esc(o.d)}</small>` : ""}</button>`).join("")}</div>
+    <div class="navq"><button class="btn btn-borda" data-acao="voltar">${estado.passo === 0 ? "Início" : "Voltar"}</button>
+      <button class="btn btn-principal" data-acao="avancar" ${marcada ? "" : "disabled"}>${estado.passo === PERGUNTAS.length - 1 ? "Ver orientação" : "Continuar"}</button></div>
+  </section>`;
+}
+
+function telaResultado() {
+  const r = estado.resp, n = nivel(r), info = NIVEIS[n];
+  const filtro = n === "n3" ? "hospital" : "rcpd";
+  const lista = ordenados(r.regiao, filtro).slice(0, 3);
+  const titulo = n === "n3" ? "Hospitais que mais realizam esse tratamento" : `CEO da Rede mais próximos (${REGIOES[r.regiao].nome})`;
+  return `<section class="tela">
+    ${estado.caso != null ? `<div class="aviso"><strong>Caso de exemplo:</strong> ${esc(CASOS[estado.caso].nome)} — ${esc(CASOS[estado.caso].desc)}</div>` : ""}
+    <div class="nivel ${n}"><span class="etiqueta">${info.etiqueta}</span><h2>${info.titulo}</h2><p>${info.texto}</p></div>
+    <div class="bloco"><span class="rotulo">Seu caminho no SUS</span>
+      <ol class="caminho">${info.caminho.map((c, i) => `<li class="${i === info.voce ? "voce" : ""}"><span class="n">${i + 1}</span><span>${esc(c)}${i === info.voce ? ' <strong class="pequeno">← próximo passo</strong>' : ""}</span></li>`).join("")}</ol>
+    </div>
+    ${n !== "urg" ? `<div class="bloco"><span class="rotulo">Confirme com um dentista</span>
+      <p>Antes de ir, fale por vídeo com um cirurgião-dentista da plataforma. Ele confirma o caminho e explica o que pedir no encaminhamento.</p>
+      <a class="btn btn-principal btn-bloco" href="#teleconsulta">Agendar teleconsulta</a></div>
+    <div class="tela"><h3>${titulo}</h3><div class="lista">${lista.map((s) => cartao(s)).join("")}</div>
+      <a class="btn btn-borda btn-bloco" href="#servicos" data-filtro="${filtro}" data-regiao="${r.regiao}">Ver todos no mapa</a></div>` : ""}
+    <p class="pequeno muted">Esta orientação não substitui a avaliação de um profissional. As regras deste protótipo ainda estão em validação.</p>
+    <button class="btn btn-borda btn-bloco" data-acao="novo">Fazer nova orientação</button>
+  </section>`;
+}
+
+function telaServicos() {
+  const lista = ordenados(estado.regiaoServ, estado.filtro);
+  const chips = [["rcpd", "CEO da Rede (28)"], ["hospital", "Hospitais (19)"], ["todos", "Todos (49)"]];
+  return `<section class="tela">
+    <h1>Serviços na cidade de São Paulo</h1>
+    <div class="filtros" role="group" aria-label="Filtrar serviços">${chips.map(([v, t]) => `<button class="chip" data-filtro="${v}" aria-pressed="${estado.filtro === v}">${t}</button>`).join("")}</div>
+    <div class="campo"><label for="regiao-serv" class="rotulo">Sua região</label>
+      <select id="regiao-serv">${Object.entries(REGIOES).map(([v, r]) => `<option value="${v}" ${estado.regiaoServ === v ? "selected" : ""}>${r.nome}</option>`).join("")}</select></div>
+    ${mapaSvg(lista, estado.regiaoServ)}
+    ${estado.filtro === "hospital" ? '<p class="pequeno muted">Ordenados pelo número de tratamentos sob anestesia geral realizados no último ano.</p>' : '<p class="pequeno muted">Ordenados pela distância até o centro da sua região. Toque em um ponto do mapa para destacar o serviço.</p>'}
+    <div class="lista">${lista.map((s) => cartao(s)).join("")}</div>
+  </section>`;
+}
+
+function telaTeleconsulta() {
+  const dias = ["Seg 24/11", "Ter 25/11", "Qua 26/11"];
+  const horas = ["09:00", "10:30", "14:00", "15:30", "17:00", "18:30"];
+  if (estado.agendado) return `<section class="tela">
+    <div class="nivel n1"><span class="etiqueta">Pedido registrado (simulação)</span><h2>Teleconsulta em ${esc(estado.agendado)}</h2>
+      <p>No app real, você receberia o link da chamada de vídeo e um lembrete. Tenha à mão os documentos do paciente e, se houver, encaminhamentos anteriores.</p></div>
+    <div class="aviso">Protótipo: nenhuma consulta foi marcada de verdade.</div>
+    <a class="btn btn-principal btn-bloco" href="#inicio">Voltar ao início</a></section>`;
+  return `<section class="tela">
+    <h1>Teleconsulta com dentista</h1>
+    <p class="muted">Uma conversa por vídeo de 20 minutos com um cirurgião-dentista cadastrado. Ele revisa suas respostas e indica o serviço adequado.</p>
+    <div class="aviso">Protótipo: os horários abaixo são ilustrativos.</div>
+    ${dias.map((d) => `<div class="bloco"><span class="rotulo">${d}</span><div class="horarios">${horas.map((h) => `<button class="chip" data-horario="${d}, ${h}" aria-pressed="${estado.horario === `${d}, ${h}`}">${h}</button>`).join("")}</div></div>`).join("")}
+    <button class="btn btn-principal btn-bloco" data-acao="agendar" ${estado.horario ? "" : "disabled"}>Confirmar ${estado.horario ? esc(estado.horario) : "horário"}</button>
+  </section>`;
+}
+
+function telaCuidados() {
+  const dicas = [
+    ["Escovação com flúor, duas vezes ao dia", "Use creme dental com flúor na quantidade indicada pelo dentista para a idade. Para crianças pequenas, a quantidade é bem menor que a de adultos."],
+    ["Posição que dá segurança", "Para quem tem dificuldade de colaborar, escovar com a pessoa sentada ou deitada, com a cabeça apoiada no colo ou no braço do cuidador, costuma ajudar. Peça ao dentista para mostrar a melhor posição."],
+    ["Rotina previsível", "Escovar sempre no mesmo horário e lugar, com o mesmo passo a passo, ajuda pessoas com autismo e outras condições a aceitar a escovação."],
+    ["Atenção ao açúcar entre as refeições", "Doces, sucos e mamadeira com açúcar ao longo do dia aumentam o risco de cárie. Prefira concentrar nas refeições."],
+    ["Quando procurar o dentista logo", "Manchas escuras, dor ao comer, sangramento frequente da gengiva ou mudança de comportamento ao mastigar são sinais para marcar uma avaliação."],
+  ];
+  return `<section class="tela">
+    <h1>Cuidados em casa</h1>
+    <div class="aviso">Conteúdo de exemplo, ainda em revisão pela equipe clínica.</div>
+    <div class="dicas">${dicas.map(([t, d], i) => `<details ${i === 0 ? "open" : ""}><summary>${esc(t)}</summary><p>${esc(d)}</p></details>`).join("")}</div>
+  </section>`;
+}
+
+function telaAssistente() {
+  const sugest = ["Meu filho tem autismo e não deixa o dentista examinar. Por onde começo?", "O que é a Rede de Cuidados à Pessoa com Deficiência?", "Como peço o encaminhamento para o CEO?"];
+  return `<section class="tela">
+    <h1>Assistente</h1>
+    <p class="muted">Tire dúvidas sobre o caminho no SUS. O assistente usa a lista de serviços do app e não faz diagnóstico.</p>
+    <div class="chat" id="chat" aria-live="polite">${estado.chat.map((m) => `<div class="msg ${m.role === "user" ? "eu" : "ia"}">${esc(m.content)}</div>`).join("")}</div>
+    ${estado.chat.length ? "" : `<div class="sugestoes">${sugest.map((s) => `<button class="chip" data-sugestao="${esc(s)}">${esc(s)}</button>`).join("")}</div>`}
+    <p id="ia-status" class="pequeno muted" hidden></p>
+    <form class="enviar" id="form-chat"><label for="pergunta" class="rotulo" hidden>Sua pergunta</label>
+      <textarea id="pergunta" placeholder="Escreva sua pergunta" rows="2"></textarea>
+      <button class="btn btn-principal" type="submit" id="btn-enviar">Enviar</button></form>
+  </section>`;
+}
+
+/* ---------- Assistente (Claude) ---------- */
+let sample = null, ctl = null;
+(async () => { try { sample = window.claude ? await window.claude.use("sample") : null; } catch { sample = null; } })();
+
+function regrasAssistente() {
+  const ceos = SERVICOS.filter((s) => s.tipo === "ceo").map((s) => `- ${s.nome} (${s.porte}${s.rcpd ? ", Rede da Pessoa com Deficiência" : ", fora da Rede"}): ${s.endereco}, ${s.bairro}. Tel. ${s.telefone || "não informado"}`).join("\n");
+  const hosp = SERVICOS.filter((s) => s.tipo === "hospital").map((s) => `- ${s.nome}: ${s.internacoes} tratamentos sob anestesia geral/ano. ${s.endereco}, ${s.bairro}`).join("\n");
+  return `Você é o assistente do protótipo "Porta Certa", que orienta famílias e cuidadores de pessoas com deficiência a encontrar atendimento odontológico no SUS, no município de São Paulo.
+Regras:
+- Responda em português do Brasil, em linguagem simples e acolhedora, em até 120 palavras.
+- Oriente sobre o caminho no SUS: UBS (atenção básica) → CEO da Rede de Cuidados à Pessoa com Deficiência (por encaminhamento da UBS) → tratamento hospitalar sob anestesia geral (por encaminhamento do CEO, via regulação), indicado quando o paciente não pode ser atendido acordado na cadeira.
+- Nunca faça diagnóstico, nunca indique remédios ou doses e nunca prometa vaga ou horário.
+- Em caso de dor forte, inchaço no rosto, sangramento que não para, febre ou dificuldade para respirar ou engolir, oriente procurar atendimento de urgência hoje (UBS ou pronto-socorro; SAMU 192 se houver dificuldade para respirar).
+- Só cite serviços da lista abaixo (dados do CNES de set/2026 e do SIH/SUS). Se não souber, diga que não sabe e sugira a teleconsulta do app.
+- Lembre, quando fizer sentido, que a teleconsulta do app com um dentista confirma o caminho.
+- Este é um protótipo: as orientações estão em validação pela equipe clínica.
+
+CEO no município de São Paulo:
+${ceos}
+
+Hospitais que realizaram tratamento odontológico sob anestesia geral (set/2025–ago/2026):
+${hosp}`;
+}
+
+function mensagemErro(code) {
+  if (code === "not_granted" || code === "sampling_disabled" || code === "capability_disabled") return "O assistente não está disponível nesta visualização.";
+  if (code === "rate_limited") return "Muitas perguntas seguidas. Tente de novo daqui a pouco.";
+  if (code === "refused") return "Não consegui responder a essa pergunta. Tente escrever de outro jeito.";
+  return "Não consegui responder agora. Tente de novo.";
+}
+
+async function perguntar(texto) {
+  texto = texto.trim();
+  if (!texto) return;
+  const status = $("#ia-status");
+  if (!sample) { status.hidden = false; status.textContent = "O assistente funciona quando o app é aberto pelo link do Claude. Nesta visualização ele não está disponível."; return; }
+  estado.chat.push({ role: "user", content: texto });
+  render();
+  const chat = $("#chat");
+  const bolha = document.createElement("div");
+  bolha.className = "msg ia"; bolha.textContent = "Pensando…";
+  chat.append(bolha); bolha.scrollIntoView({ block: "end", behavior: "smooth" });
+  $("#btn-enviar").disabled = true;
+  ctl = new AbortController();
+  try {
+    const turnos = [{ role: "user", content: regrasAssistente() }, ...estado.chat.slice(-8)];
+    const { text } = await sample(turnos, { cache: false, modelTier: "quick", signal: ctl.signal, onText: ({ text }) => { bolha.textContent = text; } });
+    estado.chat.push({ role: "assistant", content: text });
+  } catch (e) {
+    const parcial = e && e.text;
+    if (parcial) estado.chat.push({ role: "assistant", content: parcial });
+    else estado.chat.pop();
+    render();
+    const st = $("#ia-status"); st.hidden = false; st.textContent = mensagemErro(e && e.code);
+    return;
+  }
+  render();
+}
+
+/* ---------- Roteamento e eventos ---------- */
+const VIEWS = { inicio: telaInicio, orientacao: () => estado.resultado ? telaResultado() : telaPergunta(), servicos: telaServicos, assistente: telaAssistente, teleconsulta: telaTeleconsulta, cuidados: telaCuidados };
+function atual() { const h = location.hash.slice(1); return VIEWS[h] ? h : "inicio"; }
+function render() {
+  const v = atual();
+  $("#conteudo").innerHTML = VIEWS[v]();
+  const navAtivo = { teleconsulta: "orientacao", cuidados: "inicio" }[v] || v;
+  document.querySelectorAll("nav.barra a").forEach((a) => { if (a.dataset.nav === navAtivo) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+}
+function ir(view) { if (location.hash.slice(1) === view) render(); else location.hash = view; window.scrollTo(0, 0); }
+
+window.addEventListener("hashchange", () => { render(); window.scrollTo(0, 0); });
+document.addEventListener("click", (ev) => {
+  const el = ev.target.closest("button, a, circle, rect");
+  if (!el) return;
+  const d = el.dataset;
+  if (d.caso != null) { const c = CASOS[+d.caso]; estado.resp = { ...c.resp }; estado.caso = +d.caso; estado.resultado = true; estado.passo = PERGUNTAS.length - 1; ir("orientacao"); return; }
+  if (d.acao === "novo") { ev.preventDefault(); estado.resp = {}; estado.passo = 0; estado.resultado = false; estado.caso = null; ir("orientacao"); return; }
+  if (d.resp != null) { estado.resp[PERGUNTAS[estado.passo].id] = d.resp; render(); return; }
+  if (d.acao === "voltar") { if (estado.passo === 0) ir("inicio"); else { estado.passo--; render(); } return; }
+  if (d.acao === "avancar") { if (estado.passo < PERGUNTAS.length - 1) estado.passo++; else { estado.resultado = true; estado.caso = null; } render(); window.scrollTo(0, 0); return; }
+  if (d.filtro && el.tagName === "BUTTON") { estado.filtro = d.filtro; estado.selecionado = null; render(); return; }
+  if (d.filtro && el.tagName === "A") { estado.filtro = d.filtro; estado.regiaoServ = d.regiao || estado.regiaoServ; estado.selecionado = null; return; }
+  if (d.id && (el.tagName === "circle" || el.tagName === "rect")) { estado.selecionado = d.id; render(); const c = document.getElementById("s-" + d.id); if (c) c.scrollIntoView({ block: "center", behavior: "smooth" }); return; }
+  if (d.horario) { estado.horario = d.horario; render(); return; }
+  if (d.acao === "agendar") { estado.agendado = estado.horario; render(); window.scrollTo(0, 0); return; }
+  if (d.sugestao) { perguntar(d.sugestao); return; }
+  if (el.getAttribute("href") === "#teleconsulta") { estado.agendado = null; estado.horario = null; }
+});
+document.addEventListener("change", (ev) => { if (ev.target.id === "regiao-serv") { estado.regiaoServ = ev.target.value; estado.selecionado = null; render(); } });
+document.addEventListener("submit", (ev) => { if (ev.target.id === "form-chat") { ev.preventDefault(); const t = $("#pergunta").value; perguntar(t); } });
+
+render();
+</script>

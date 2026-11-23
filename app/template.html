@@ -1,0 +1,492 @@
+<title>Porta Certa</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* Layout: app de uma coluna (máx. 480px), telas trocadas pela barra inferior; um passo por tela no questionário */
+:root {
+  --bg: #F1F5F4; --surface: #FFFFFF; --ink: #15302F; --muted: #4C6462; --line: #D3DFDD;
+  --teal: #0F6E6E; --teal-ink: #FFFFFF; --teal-weak: #DCEDEB;
+  --amber: #C9730F; --amber-weak: #FBEAD3;
+  --red: #A8261E; --red-weak: #FBE3E1;
+  --font: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --nav-h: 64px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0E1918; --surface: #162524; --ink: #E4EFEE; --muted: #9BB2B0; --line: #29403E;
+  --teal: #4DB3AC; --teal-ink: #062120; --teal-weak: #173836;
+  --amber: #F0A847; --amber-weak: #3A2A12;
+  --red: #F2B8B5; --red-weak: #3D1C1A; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0E1918; --surface: #162524; --ink: #E4EFEE; --muted: #9BB2B0; --line: #29403E;
+  --teal: #4DB3AC; --teal-ink: #062120; --teal-weak: #173836;
+  --amber: #F0A847; --amber-weak: #3A2A12;
+  --red: #F2B8B5; --red-weak: #3D1C1A; color-scheme: dark }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 17px; line-height: 1.45; }
+.app { max-width: 480px; margin: 0 auto; min-height: 100%;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 12px calc(var(--nav-h) + 24px + env(safe-area-inset-bottom, 0px)); }
+h1, h2, h3 { line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: 1.65rem; } h2 { font-size: 1.3rem; } h3 { font-size: 1.05rem; }
+p { margin: 0; }
+button, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+a { color: var(--teal); }
+
+.topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 4px 12px; }
+.marca { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem; }
+.marca svg { width: 30px; height: 30px; flex: none; }
+.selo { font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--amber); background: var(--amber-weak); padding: 3px 8px; border-radius: 99px; font-weight: 700; white-space: nowrap; }
+
+.tela { display: flex; flex-direction: column; gap: 16px; }
+.bloco { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.muted { color: var(--muted); }
+.pequeno { font-size: .86rem; }
+.rotulo { font-size: .78rem; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+
+.abertura { padding: 20px 18px; border-radius: 18px; background: var(--teal); color: var(--teal-ink); display: flex; flex-direction: column; gap: 14px; }
+.abertura p { opacity: .92; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 12px 18px; border-radius: 12px; border: 0; font-weight: 700; text-align: center; text-decoration: none; }
+.btn-claro { background: var(--surface); color: var(--teal); }
+.btn-principal { background: var(--teal); color: var(--teal-ink); }
+.btn-borda { background: transparent; border: 2px solid var(--teal); color: var(--teal); }
+.btn-bloco { width: 100%; }
+.btn:disabled { opacity: .45; cursor: default; }
+
+.casos { display: grid; gap: 10px; }
+.caso { text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.caso strong { font-size: 1rem; }
+.atalhos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.atalho { text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; text-align: left; display: flex; flex-direction: column; gap: 6px; min-height: 96px; }
+.atalho svg { width: 26px; height: 26px; color: var(--teal); }
+
+/* Questionário */
+.progresso { display: flex; gap: 6px; }
+.progresso span { flex: 1; height: 6px; border-radius: 99px; background: var(--line); }
+.progresso span.feito { background: var(--teal); }
+.opcoes { display: grid; gap: 10px; }
+.opcao { text-align: left; background: var(--surface); border: 2px solid var(--line); border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px; min-height: 56px; }
+.opcao[aria-pressed="true"] { border-color: var(--teal); background: var(--teal-weak); }
+.opcao small { color: var(--muted); font-size: .86rem; }
+.navq { display: flex; gap: 10px; }
+.navq .btn { flex: 1; }
+
+/* Resultado */
+.nivel { border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 8px; border: 2px solid; }
+.nivel.n1 { background: var(--teal-weak); border-color: var(--teal); }
+.nivel.n2 { background: var(--teal-weak); border-color: var(--teal); }
+.nivel.n3 { background: var(--amber-weak); border-color: var(--amber); }
+.nivel.urg { background: var(--red-weak); border-color: var(--red); }
+.nivel .etiqueta { font-weight: 700; font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; }
+.caminho { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.caminho li { display: grid; grid-template-columns: 30px 1fr; gap: 10px; padding-bottom: 14px; position: relative; }
+.caminho li::before { content: ""; position: absolute; left: 14px; top: 30px; bottom: 0; width: 2px; background: var(--line); }
+.caminho li:last-child { padding-bottom: 0; }
+.caminho li:last-child::before { display: none; }
+.caminho .n { width: 30px; height: 30px; border-radius: 50%; background: var(--teal); color: var(--teal-ink); display: grid; place-items: center; font-weight: 700; font-size: .9rem; }
+.caminho li.voce .n { background: var(--amber); color: var(--teal-ink); }
+
+/* Serviços */
+.filtros { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { border: 2px solid var(--line); background: var(--surface); border-radius: 99px; padding: 8px 14px; font-size: .92rem; font-weight: 700; min-height: 44px; }
+.chip[aria-pressed="true"] { border-color: var(--teal); background: var(--teal-weak); color: var(--ink); }
+.campo { display: flex; flex-direction: column; gap: 6px; }
+.campo select { min-height: 48px; border-radius: 12px; border: 2px solid var(--line); background: var(--surface); padding: 8px 12px; }
+.mapa { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+.mapa svg { display: block; width: 100%; height: auto; max-height: 52vh; }
+.mapa .cidade { fill: var(--teal-weak); stroke: var(--teal); stroke-width: 3; }
+.mapa .p-ceo { fill: var(--teal); stroke: var(--surface); stroke-width: 3; }
+.mapa .p-ceo.sem { fill: var(--surface); stroke: var(--teal); stroke-width: 4; }
+.mapa .p-hosp { fill: var(--amber); stroke: var(--surface); stroke-width: 3; }
+.mapa .voce { fill: var(--red); stroke: var(--surface); stroke-width: 4; }
+.mapa .sel { stroke: var(--ink); stroke-width: 6; }
+.legenda { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .82rem; color: var(--muted); padding: 6px 4px 2px; }
+.legenda i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
+.lista { display: flex; flex-direction: column; gap: 10px; }
+.servico { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; }
+.servico.ativo { border-color: var(--teal); box-shadow: 0 0 0 2px var(--teal); }
+.servico .linha1 { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+.servico h3 { min-width: 0; }
+.dist { white-space: nowrap; font-weight: 700; color: var(--teal); font-variant-numeric: tabular-nums; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-size: .75rem; font-weight: 700; padding: 3px 8px; border-radius: 99px; background: var(--teal-weak); color: var(--ink); }
+.tag.amb { background: var(--amber-weak); }
+.acoes { display: flex; flex-wrap: wrap; gap: 8px; }
+.acoes .btn { min-height: 44px; padding: 8px 14px; font-size: .92rem; }
+
+/* Teleconsulta */
+.horarios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.horarios .chip { width: 100%; }
+.aviso { border-left: 4px solid var(--amber); background: var(--amber-weak); padding: 12px 14px; border-radius: 10px; font-size: .9rem; }
+
+/* Assistente */
+.chat { display: flex; flex-direction: column; gap: 10px; }
+.msg { max-width: 88%; padding: 10px 14px; border-radius: 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.msg.eu { align-self: flex-end; background: var(--teal); color: var(--teal-ink); border-bottom-right-radius: 4px; }
+.msg.ia { align-self: flex-start; background: var(--surface); border: 1px solid var(--line); border-bottom-left-radius: 4px; }
+.sugestoes { display: flex; flex-wrap: wrap; gap: 8px; }
+.sugestoes .chip { font-weight: 400; text-align: left; }
+.enviar { display: flex; gap: 8px; align-items: flex-end; }
+.enviar textarea { flex: 1; min-width: 0; min-height: 52px; max-height: 140px; resize: vertical; border-radius: 12px; border: 2px solid var(--line); background: var(--surface); padding: 12px; font: inherit; color: var(--ink); }
+
+.dicas { display: flex; flex-direction: column; gap: 10px; }
+.dicas details { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+.dicas summary { font-weight: 700; cursor: pointer; min-height: 28px; }
+.dicas details p { margin-top: 8px; }
+
+nav.barra { position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; background: var(--surface); border-top: 1px solid var(--line);
+  padding-bottom: env(safe-area-inset-bottom, 0px); padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px); }
+nav.barra .itens { max-width: 480px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
+nav.barra a { height: var(--nav-h); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: var(--muted); font-size: .76rem; font-weight: 700; }
+nav.barra a svg { width: 24px; height: 24px; }
+nav.barra a[aria-current="page"] { color: var(--teal); }
+.rodape { font-size: .8rem; color: var(--muted); text-align: center; padding-top: 6px; }
+@media (prefers-reduced-motion: no-preference) { .tela { animation: entra .18s ease-out; } @keyframes entra { from { transform: translateY(6px); } to { transform: none; } } }
+</style>
+
+<div class="app">
+  <header class="topo">
+    <div class="marca" aria-label="Porta Certa">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="3" width="18" height="26" rx="3" fill="var(--teal)"/><path d="M23 3 L28 6 V26 L23 29 Z" fill="var(--amber)"/><circle cx="19" cy="17" r="1.8" fill="var(--surface)"/></svg>
+      Porta Certa
+    </div>
+    <span class="selo">Protótipo</span>
+  </header>
+
+  <main id="conteudo"></main>
+  <p class="rodape">Dados: CNES (set/2026) e SIH/SUS (set/2025–ago/2026), município de São Paulo. Regras de orientação em validação pela equipe clínica.</p>
+</div>
+
+<nav class="barra" aria-label="Navegação principal">
+  <div class="itens">
+    <a href="#inicio" data-nav="inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Início</a>
+    <a href="#orientacao" data-nav="orientacao"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>Orientação</a>
+    <a href="#servicos" data-nav="servicos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Serviços</a>
+    <a href="#assistente" data-nav="assistente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8M8 13h5"/></svg>Assistente</a>
+  </div>
+</nav>
+
+<script>
+const SERVICOS = __DADOS__;
+const CONTORNO = "__CONTORNO__";
+const VIEWBOX = "__VIEWBOX__";
+const PROJ = { lon0: -46.83, lat1: -23.35, cos: 0.917, esc: 1000 };
+
+const REGIOES = {
+  centro: { nome: "Centro", lat: -23.5505, lon: -46.6333 },
+  norte: { nome: "Zona Norte", lat: -23.4800, lon: -46.6300 },
+  leste: { nome: "Zona Leste", lat: -23.5450, lon: -46.4800 },
+  sul: { nome: "Zona Sul", lat: -23.6800, lon: -46.7000 },
+  oeste: { nome: "Zona Oeste", lat: -23.5700, lon: -46.7300 },
+};
+
+const PERGUNTAS = [
+  { id: "quem", titulo: "Para quem é o atendimento?", opcoes: [
+    { v: "crianca", t: "Criança", d: "Até 12 anos" },
+    { v: "adolescente", t: "Adolescente", d: "13 a 17 anos" },
+    { v: "adulto", t: "Adulto ou idoso", d: "18 anos ou mais" } ] },
+  { id: "situacao", titulo: "O que está acontecendo agora?", opcoes: [
+    { v: "urgencia", t: "Dor forte, inchaço no rosto ou sangramento que não para", d: "Precisa de atenção hoje" },
+    { v: "rotina", t: "Consulta, limpeza ou avaliação", d: "Sem dor forte no momento" },
+    { v: "tratamento", t: "Precisa de tratamento", d: "Cárie, canal, extração, gengiva" },
+    { v: "encaminhado", t: "Já tenho encaminhamento de um dentista", d: "Guia ou pedido por escrito" } ] },
+  { id: "cadeira", titulo: "Na cadeira do dentista, a pessoa consegue…", opcoes: [
+    { v: "sim", t: "Ficar sentada e colaborar", d: "Mesmo com algum medo" },
+    { v: "ajuda", t: "Colaborar com ajuda ou adaptações", d: "Precisa de tempo, contenção leve ou ambiente calmo" },
+    { v: "nao", t: "Não consegue ser atendida acordada", d: "Agitação intensa, movimentos involuntários ou medo extremo" } ] },
+  { id: "tentou", titulo: "Já tentou tratamento em um Centro de Especialidades (CEO) sem conseguir terminar?", opcoes: [
+    { v: "sim", t: "Sim, tentou e não conseguiu" },
+    { v: "nao", t: "Não, ainda não" } ] },
+  { id: "regiao", titulo: "Em que região da cidade vocês estão?", opcoes: Object.entries(REGIOES).map(([v, r]) => ({ v, t: r.nome })) },
+];
+
+const CASOS = [
+  { nome: "Lucas, 8 anos", desc: "Autismo. Não aceita a cadeira; tentou tratar cáries no CEO sem sucesso.",
+    resp: { quem: "crianca", situacao: "tratamento", cadeira: "nao", tentou: "sim", regiao: "leste" } },
+  { nome: "Dona Lúcia, 74 anos", desc: "Alzheimer leve. Precisa extrair um dente; colabora com calma e paciência.",
+    resp: { quem: "adulto", situacao: "tratamento", cadeira: "ajuda", tentou: "nao", regiao: "sul" } },
+  { nome: "Ana, 5 anos", desc: "Síndrome de Down. Primeira consulta, sem dor.",
+    resp: { quem: "crianca", situacao: "rotina", cadeira: "sim", tentou: "nao", regiao: "norte" } },
+];
+
+const estado = { passo: 0, resp: {}, filtro: "rcpd", regiaoServ: "centro", selecionado: null, chat: [], caso: null };
+
+// Regras provisórias de orientação — a validar pela equipe clínica.
+function nivel(r) {
+  if (r.situacao === "urgencia") return "urg";
+  if (r.cadeira === "nao" && (r.tentou === "sim" || r.situacao === "encaminhado")) return "n3";
+  if (r.cadeira === "nao") return "n2";
+  if (r.situacao === "tratamento" || r.situacao === "encaminhado" || r.cadeira === "ajuda") return "n2";
+  return "n1";
+}
+
+const NIVEIS = {
+  urg: { etiqueta: "Atenção hoje", titulo: "Procure atendimento de urgência",
+    texto: "Dor forte, inchaço no rosto ou sangramento que não para precisam de avaliação no mesmo dia. Procure a UBS mais próxima (acolhimento) ou um pronto-socorro. Se houver dificuldade para respirar ou engolir, ligue 192 (SAMU).",
+    caminho: ["Hoje: UBS (acolhimento) ou pronto-socorro", "Depois da urgência: avaliação na UBS", "Se precisar: encaminhamento ao CEO"], voce: 0 },
+  n1: { etiqueta: "Atenção básica", titulo: "Comece pela Unidade Básica de Saúde (UBS)",
+    texto: "A equipe de saúde bucal da UBS faz a consulta, a limpeza e o acompanhamento. Se for preciso um tratamento especializado, ela encaminha para o Centro de Especialidades Odontológicas (CEO).",
+    caminho: ["UBS: consulta e cuidados de rotina", "Se precisar: encaminhamento ao CEO com atendimento à pessoa com deficiência", "Casos que não podem ser tratados acordados: hospital"], voce: 0 },
+  n2: { etiqueta: "Atenção especializada", titulo: "O caso indica um CEO da Rede de Cuidados à Pessoa com Deficiência",
+    texto: "Esses centros têm estrutura e equipe para atender pessoas com deficiência. O acesso é por encaminhamento: peça na UBS o encaminhamento para um CEO com atendimento a pacientes com necessidades especiais.",
+    caminho: ["UBS: peça o encaminhamento", "CEO da Rede de Cuidados à Pessoa com Deficiência", "Se não for possível tratar acordado: CEO encaminha ao hospital"], voce: 1 },
+  n3: { etiqueta: "Atenção hospitalar", titulo: "O caso pode precisar de tratamento sob anestesia geral",
+    texto: "Quando o tratamento não é possível na cadeira, ele é feito em hospital, com o paciente sedado. O acesso é pelo encaminhamento do CEO, por meio da regulação. Leve ao CEO o histórico das tentativas anteriores.",
+    caminho: ["CEO: avaliação e pedido de tratamento hospitalar", "Regulação do SUS: agendamento", "Hospital: tratamento sob anestesia geral"], voce: 0 },
+};
+
+const $ = (s, el = document) => el.querySelector(s);
+const esc = (t) => String(t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+function distKm(a, b) {
+  const R = 6371, rad = (x) => x * Math.PI / 180;
+  const dLat = rad(b.lat - a.lat), dLon = rad(b.lon - a.lon);
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(dLon / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+const xy = (p) => ({ x: (p.lon - PROJ.lon0) * PROJ.cos * PROJ.esc, y: (PROJ.lat1 - p.lat) * PROJ.esc });
+
+function ordenados(regiao, filtro) {
+  const ref = REGIOES[regiao];
+  return SERVICOS.filter((s) => filtro === "todos" || (filtro === "rcpd" && s.tipo === "ceo" && s.rcpd) || (filtro === "hospital" && s.tipo === "hospital"))
+    .map((s) => ({ ...s, km: distKm(ref, s) }))
+    .sort((a, b) => filtro === "hospital" ? b.internacoes - a.internacoes : a.km - b.km);
+}
+
+function cartao(s, extra = "") {
+  const tags = s.tipo === "ceo"
+    ? `<span class="tag">${esc(s.porte)}</span>${s.rcpd ? '<span class="tag">Rede da Pessoa com Deficiência</span>' : '<span class="tag amb">Fora da Rede da Pessoa com Deficiência</span>'}`
+    : `<span class="tag amb">Hospital</span><span class="tag">${s.internacoes} tratamentos sob anestesia/ano</span>`;
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${s.lat},${s.lon}`;
+  return `<article class="servico ${estado.selecionado === s.id ? "ativo" : ""}" id="s-${s.id}">
+    <div class="linha1"><h3>${esc(s.nome)}</h3>${s.km != null ? `<span class="dist">${s.km.toFixed(1).replace(".", ",")} km</span>` : ""}</div>
+    <div class="tags">${tags}</div>
+    <p class="pequeno muted">${esc(s.endereco)} · ${esc(s.bairro)}</p>
+    ${s.telefone ? `<p class="pequeno">Telefone: <strong>${esc(s.telefone)}</strong></p>` : ""}
+    ${s.tipo === "hospital" ? '<p class="pequeno muted">Acesso somente por encaminhamento do CEO, via regulação.</p>' : ""}
+    <div class="acoes"><a class="btn btn-borda" href="${mapsUrl}" target="_blank" rel="noopener">Como chegar</a>${extra}</div>
+  </article>`;
+}
+
+function mapaSvg(lista, regiao) {
+  const ref = xy(REGIOES[regiao]);
+  const pts = lista.map((s) => s.tipo === "ceo"
+    ? `<circle class="p-ceo ${s.rcpd ? "" : "sem"} ${estado.selecionado === s.id ? "sel" : ""}" cx="${s.x}" cy="${s.y}" r="11" data-id="${s.id}"><title>${esc(s.nome)}</title></circle>`
+    : `<rect class="p-hosp ${estado.selecionado === s.id ? "sel" : ""}" x="${s.x - 10}" y="${s.y - 10}" width="20" height="20" transform="rotate(45 ${s.x} ${s.y})" data-id="${s.id}"><title>${esc(s.nome)}</title></rect>`).join("");
+  return `<div class="mapa"><svg viewBox="${VIEWBOX}" role="img" aria-label="Mapa do município de São Paulo com os serviços">
+    <path class="cidade" d="${CONTORNO}"/>${pts}
+    <circle class="voce" cx="${ref.x}" cy="${ref.y}" r="13"><title>Sua região</title></circle></svg>
+    <div class="legenda"><span><i style="background:var(--teal)"></i>CEO na Rede</span><span><i style="border:2px solid var(--teal)"></i>CEO fora da Rede</span><span><i style="background:var(--amber);border-radius:2px"></i>Hospital</span><span><i style="background:var(--red)"></i>Sua região</span></div></div>`;
+}
+
+/* ---------- Telas ---------- */
+function telaInicio() {
+  return `<section class="tela">
+    <div class="abertura">
+      <h1>Encontre o lugar certo para o atendimento odontológico</h1>
+      <p>Para famílias e cuidadores de pessoas com deficiência no SUS. Responda 5 perguntas e veja qual serviço tem mais chance de resolver o caso.</p>
+      <a class="btn btn-claro" href="#orientacao" data-acao="novo">Começar orientação</a>
+    </div>
+    <div class="bloco">
+      <span class="rotulo">Casos de exemplo</span>
+      <p class="pequeno muted">Toque em um caso para ver o caminho completo, com as respostas já preenchidas.</p>
+      <div class="casos">${CASOS.map((c, i) => `<button class="caso" data-caso="${i}"><strong>${esc(c.nome)}</strong><span class="pequeno muted">${esc(c.desc)}</span></button>`).join("")}</div>
+    </div>
+    <div class="atalhos">
+      <a class="atalho" href="#servicos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><strong>Serviços perto de você</strong><span class="pequeno muted">30 CEO e 19 hospitais</span></a>
+      <a class="atalho" href="#cuidados"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 3c-2.5 0-4 2-4 4.5 0 3 1.2 5 2 8 .5 2 1 5.5 2.5 5.5s1.5-4 3.5-4 2 4 3.5 4 2-3.5 2.5-5.5c.8-3 2-5 2-8C20 5 18.5 3 16 3c-1.6 0-2.6 1-4 1S9.6 3 8 3z"/></svg><strong>Cuidados em casa</strong><span class="pequeno muted">Escovação e prevenção</span></a>
+    </div>
+  </section>`;
+}
+
+function telaPergunta() {
+  const q = PERGUNTAS[estado.passo];
+  const marcada = estado.resp[q.id];
+  return `<section class="tela">
+    <div class="progresso" aria-hidden="true">${PERGUNTAS.map((_, i) => `<span class="${i <= estado.passo ? "feito" : ""}"></span>`).join("")}</div>
+    <span class="rotulo">Pergunta ${estado.passo + 1} de ${PERGUNTAS.length}</span>
+    <h2>${esc(q.titulo)}</h2>
+    <div class="opcoes" role="group" aria-label="${esc(q.titulo)}">${q.opcoes.map((o) => `<button class="opcao" data-resp="${o.v}" aria-pressed="${marcada === o.v}"><strong>${esc(o.t)}</strong>${o.d ? `<small>${esc(o.d)}</small>` : ""}</button>`).join("")}</div>
+    <div class="navq"><button class="btn btn-borda" data-acao="voltar">${estado.passo === 0 ? "Início" : "Voltar"}</button>
+      <button class="btn btn-principal" data-acao="avancar" ${marcada ? "" : "disabled"}>${estado.passo === PERGUNTAS.length - 1 ? "Ver orientação" : "Continuar"}</button></div>
+  </section>`;
+}
+
+function telaResultado() {
+  const r = estado.resp, n = nivel(r), info = NIVEIS[n];
+  const filtro = n === "n3" ? "hospital" : "rcpd";
+  const lista = ordenados(r.regiao, filtro).slice(0, 3);
+  const titulo = n === "n3" ? "Hospitais que mais realizam esse tratamento" : `CEO da Rede mais próximos (${REGIOES[r.regiao].nome})`;
+  return `<section class="tela">
+    ${estado.caso != null ? `<div class="aviso"><strong>Caso de exemplo:</strong> ${esc(CASOS[estado.caso].nome)} — ${esc(CASOS[estado.caso].desc)}</div>` : ""}
+    <div class="nivel ${n}"><span class="etiqueta">${info.etiqueta}</span><h2>${info.titulo}</h2><p>${info.texto}</p></div>
+    <div class="bloco"><span class="rotulo">Seu caminho no SUS</span>
+      <ol class="caminho">${info.caminho.map((c, i) => `<li class="${i === info.voce ? "voce" : ""}"><span class="n">${i + 1}</span><span>${esc(c)}${i === info.voce ? ' <strong class="pequeno">← próximo passo</strong>' : ""}</span></li>`).join("")}</ol>
+    </div>
+    ${n !== "urg" ? `<div class="bloco"><span class="rotulo">Confirme com um dentista</span>
+      <p>Antes de ir, fale por vídeo com um cirurgião-dentista da plataforma. Ele confirma o caminho e explica o que pedir no encaminhamento.</p>
+      <a class="btn btn-principal btn-bloco" href="#teleconsulta">Agendar teleconsulta</a></div>
+    <div class="tela"><h3>${titulo}</h3><div class="lista">${lista.map((s) => cartao(s)).join("")}</div>
+      <a class="btn btn-borda btn-bloco" href="#servicos" data-filtro="${filtro}" data-regiao="${r.regiao}">Ver todos no mapa</a></div>` : ""}
+    <p class="pequeno muted">Esta orientação não substitui a avaliação de um profissional. As regras deste protótipo ainda estão em validação.</p>
+    <button class="btn btn-borda btn-bloco" data-acao="novo">Fazer nova orientação</button>
+  </section>`;
+}
+
+function telaServicos() {
+  const lista = ordenados(estado.regiaoServ, estado.filtro);
+  const chips = [["rcpd", "CEO da Rede (28)"], ["hospital", "Hospitais (19)"], ["todos", "Todos (49)"]];
+  return `<section class="tela">
+    <h1>Serviços na cidade de São Paulo</h1>
+    <div class="filtros" role="group" aria-label="Filtrar serviços">${chips.map(([v, t]) => `<button class="chip" data-filtro="${v}" aria-pressed="${estado.filtro === v}">${t}</button>`).join("")}</div>
+    <div class="campo"><label for="regiao-serv" class="rotulo">Sua região</label>
+      <select id="regiao-serv">${Object.entries(REGIOES).map(([v, r]) => `<option value="${v}" ${estado.regiaoServ === v ? "selected" : ""}>${r.nome}</option>`).join("")}</select></div>
+    ${mapaSvg(lista, estado.regiaoServ)}
+    ${estado.filtro === "hospital" ? '<p class="pequeno muted">Ordenados pelo número de tratamentos sob anestesia geral realizados no último ano.</p>' : '<p class="pequeno muted">Ordenados pela distância até o centro da sua região. Toque em um ponto do mapa para destacar o serviço.</p>'}
+    <div class="lista">${lista.map((s) => cartao(s)).join("")}</div>
+  </section>`;
+}
+
+function telaTeleconsulta() {
+  const dias = ["Seg 24/11", "Ter 25/11", "Qua 26/11"];
+  const horas = ["09:00", "10:30", "14:00", "15:30", "17:00", "18:30"];
+  if (estado.agendado) return `<section class="tela">
+    <div class="nivel n1"><span class="etiqueta">Pedido registrado (simulação)</span><h2>Teleconsulta em ${esc(estado.agendado)}</h2>
+      <p>No app real, você receberia o link da chamada de vídeo e um lembrete. Tenha à mão os documentos do paciente e, se houver, encaminhamentos anteriores.</p></div>
+    <div class="aviso">Protótipo: nenhuma consulta foi marcada de verdade.</div>
+    <a class="btn btn-principal btn-bloco" href="#inicio">Voltar ao início</a></section>`;
+  return `<section class="tela">
+    <h1>Teleconsulta com dentista</h1>
+    <p class="muted">Uma conversa por vídeo de 20 minutos com um cirurgião-dentista cadastrado. Ele revisa suas respostas e indica o serviço adequado.</p>
+    <div class="aviso">Protótipo: os horários abaixo são ilustrativos.</div>
+    ${dias.map((d) => `<div class="bloco"><span class="rotulo">${d}</span><div class="horarios">${horas.map((h) => `<button class="chip" data-horario="${d}, ${h}" aria-pressed="${estado.horario === `${d}, ${h}`}">${h}</button>`).join("")}</div></div>`).join("")}
+    <button class="btn btn-principal btn-bloco" data-acao="agendar" ${estado.horario ? "" : "disabled"}>Confirmar ${estado.horario ? esc(estado.horario) : "horário"}</button>
+  </section>`;
+}
+
+function telaCuidados() {
+  const dicas = [
+    ["Escovação com flúor, duas vezes ao dia", "Use creme dental com flúor na quantidade indicada pelo dentista para a idade. Para crianças pequenas, a quantidade é bem menor que a de adultos."],
+    ["Posição que dá segurança", "Para quem tem dificuldade de colaborar, escovar com a pessoa sentada ou deitada, com a cabeça apoiada no colo ou no braço do cuidador, costuma ajudar. Peça ao dentista para mostrar a melhor posição."],
+    ["Rotina previsível", "Escovar sempre no mesmo horário e lugar, com o mesmo passo a passo, ajuda pessoas com autismo e outras condições a aceitar a escovação."],
+    ["Atenção ao açúcar entre as refeições", "Doces, sucos e mamadeira com açúcar ao longo do dia aumentam o risco de cárie. Prefira concentrar nas refeições."],
+    ["Quando procurar o dentista logo", "Manchas escuras, dor ao comer, sangramento frequente da gengiva ou mudança de comportamento ao mastigar são sinais para marcar uma avaliação."],
+  ];
+  return `<section class="tela">
+    <h1>Cuidados em casa</h1>
+    <div class="aviso">Conteúdo de exemplo, ainda em revisão pela equipe clínica.</div>
+    <div class="dicas">${dicas.map(([t, d], i) => `<details ${i === 0 ? "open" : ""}><summary>${esc(t)}</summary><p>${esc(d)}</p></details>`).join("")}</div>
+  </section>`;
+}
+
+function telaAssistente() {
+  const sugest = ["Meu filho tem autismo e não deixa o dentista examinar. Por onde começo?", "O que é a Rede de Cuidados à Pessoa com Deficiência?", "Como peço o encaminhamento para o CEO?"];
+  return `<section class="tela">
+    <h1>Assistente</h1>
+    <p class="muted">Tire dúvidas sobre o caminho no SUS. O assistente usa a lista de serviços do app e não faz diagnóstico.</p>
+    <div class="chat" id="chat" aria-live="polite">${estado.chat.map((m) => `<div class="msg ${m.role === "user" ? "eu" : "ia"}">${esc(m.content)}</div>`).join("")}</div>
+    ${estado.chat.length ? "" : `<div class="sugestoes">${sugest.map((s) => `<button class="chip" data-sugestao="${esc(s)}">${esc(s)}</button>`).join("")}</div>`}
+    <p id="ia-status" class="pequeno muted" hidden></p>
+    <form class="enviar" id="form-chat"><label for="pergunta" class="rotulo" hidden>Sua pergunta</label>
+      <textarea id="pergunta" placeholder="Escreva sua pergunta" rows="2"></textarea>
+      <button class="btn btn-principal" type="submit" id="btn-enviar">Enviar</button></form>
+  </section>`;
+}
+
+/* ---------- Assistente (Claude) ---------- */
+let sample = null, ctl = null;
+(async () => { try { sample = window.claude ? await window.claude.use("sample") : null; } catch { sample = null; } })();
+
+function regrasAssistente() {
+  const ceos = SERVICOS.filter((s) => s.tipo === "ceo").map((s) => `- ${s.nome} (${s.porte}${s.rcpd ? ", Rede da Pessoa com Deficiência" : ", fora da Rede"}): ${s.endereco}, ${s.bairro}. Tel. ${s.telefone || "não informado"}`).join("\n");
+  const hosp = SERVICOS.filter((s) => s.tipo === "hospital").map((s) => `- ${s.nome}: ${s.internacoes} tratamentos sob anestesia geral/ano. ${s.endereco}, ${s.bairro}`).join("\n");
+  return `Você é o assistente do protótipo "Porta Certa", que orienta famílias e cuidadores de pessoas com deficiência a encontrar atendimento odontológico no SUS, no município de São Paulo.
+Regras:
+- Responda em português do Brasil, em linguagem simples e acolhedora, em até 120 palavras.
+- Oriente sobre o caminho no SUS: UBS (atenção básica) → CEO da Rede de Cuidados à Pessoa com Deficiência (por encaminhamento da UBS) → tratamento hospitalar sob anestesia geral (por encaminhamento do CEO, via regulação), indicado quando o paciente não pode ser atendido acordado na cadeira.
+- Nunca faça diagnóstico, nunca indique remédios ou doses e nunca prometa vaga ou horário.
+- Em caso de dor forte, inchaço no rosto, sangramento que não para, febre ou dificuldade para respirar ou engolir, oriente procurar atendimento de urgência hoje (UBS ou pronto-socorro; SAMU 192 se houver dificuldade para respirar).
+- Só cite serviços da lista abaixo (dados do CNES de set/2026 e do SIH/SUS). Se não souber, diga que não sabe e sugira a teleconsulta do app.
+- Lembre, quando fizer sentido, que a teleconsulta do app com um dentista confirma o caminho.
+- Este é um protótipo: as orientações estão em validação pela equipe clínica.
+
+CEO no município de São Paulo:
+${ceos}
+
+Hospitais que realizaram tratamento odontológico sob anestesia geral (set/2025–ago/2026):
+${hosp}`;
+}
+
+function mensagemErro(code) {
+  if (code === "not_granted" || code === "sampling_disabled" || code === "capability_disabled") return "O assistente não está disponível nesta visualização.";
+  if (code === "rate_limited") return "Muitas perguntas seguidas. Tente de novo daqui a pouco.";
+  if (code === "refused") return "Não consegui responder a essa pergunta. Tente escrever de outro jeito.";
+  return "Não consegui responder agora. Tente de novo.";
+}
+
+async function perguntar(texto) {
+  texto = texto.trim();
+  if (!texto) return;
+  const status = $("#ia-status");
+  if (!sample) { status.hidden = false; status.textContent = "O assistente funciona quando o app é aberto pelo link do Claude. Nesta visualização ele não está disponível."; return; }
+  estado.chat.push({ role: "user", content: texto });
+  render();
+  const chat = $("#chat");
+  const bolha = document.createElement("div");
+  bolha.className = "msg ia"; bolha.textContent = "Pensando…";
+  chat.append(bolha); bolha.scrollIntoView({ block: "end", behavior: "smooth" });
+  $("#btn-enviar").disabled = true;
+  ctl = new AbortController();
+  try {
+    const turnos = [{ role: "user", content: regrasAssistente() }, ...estado.chat.slice(-8)];
+    const { text } = await sample(turnos, { cache: false, modelTier: "quick", signal: ctl.signal, onText: ({ text }) => { bolha.textContent = text; } });
+    estado.chat.push({ role: "assistant", content: text });
+  } catch (e) {
+    const parcial = e && e.text;
+    if (parcial) estado.chat.push({ role: "assistant", content: parcial });
+    else estado.chat.pop();
+    render();
+    const st = $("#ia-status"); st.hidden = false; st.textContent = mensagemErro(e && e.code);
+    return;
+  }
+  render();
+}
+
+/* ---------- Roteamento e eventos ---------- */
+const VIEWS = { inicio: telaInicio, orientacao: () => estado.resultado ? telaResultado() : telaPergunta(), servicos: telaServicos, assistente: telaAssistente, teleconsulta: telaTeleconsulta, cuidados: telaCuidados };
+function atual() { const h = location.hash.slice(1); return VIEWS[h] ? h : "inicio"; }
+function render() {
+  const v = atual();
+  $("#conteudo").innerHTML = VIEWS[v]();
+  const navAtivo = { teleconsulta: "orientacao", cuidados: "inicio" }[v] || v;
+  document.querySelectorAll("nav.barra a").forEach((a) => { if (a.dataset.nav === navAtivo) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+}
+function ir(view) { if (location.hash.slice(1) === view) render(); else location.hash = view; window.scrollTo(0, 0); }
+
+window.addEventListener("hashchange", () => { render(); window.scrollTo(0, 0); });
+document.addEventListener("click", (ev) => {
+  const el = ev.target.closest("button, a, circle, rect");
+  if (!el) return;
+  const d = el.dataset;
+  if (d.caso != null) { const c = CASOS[+d.caso]; estado.resp = { ...c.resp }; estado.caso = +d.caso; estado.resultado = true; estado.passo = PERGUNTAS.length - 1; ir("orientacao"); return; }
+  if (d.acao === "novo") { ev.preventDefault(); estado.resp = {}; estado.passo = 0; estado.resultado = false; estado.caso = null; ir("orientacao"); return; }
+  if (d.resp != null) { estado.resp[PERGUNTAS[estado.passo].id] = d.resp; render(); return; }
+  if (d.acao === "voltar") { if (estado.passo === 0) ir("inicio"); else { estado.passo--; render(); } return; }
+  if (d.acao === "avancar") { if (estado.passo < PERGUNTAS.length - 1) estado.passo++; else { estado.resultado = true; estado.caso = null; } render(); window.scrollTo(0, 0); return; }
+  if (d.filtro && el.tagName === "BUTTON") { estado.filtro = d.filtro; estado.selecionado = null; render(); return; }
+  if (d.filtro && el.tagName === "A") { estado.filtro = d.filtro; estado.regiaoServ = d.regiao || estado.regiaoServ; estado.selecionado = null; return; }
+  if (d.id && (el.tagName === "circle" || el.tagName === "rect")) { estado.selecionado = d.id; render(); const c = document.getElementById("s-" + d.id); if (c) c.scrollIntoView({ block: "center", behavior: "smooth" }); return; }
+  if (d.horario) { estado.horario = d.horario; render(); return; }
+  if (d.acao === "agendar") { estado.agendado = estado.horario; render(); window.scrollTo(0, 0); return; }
+  if (d.sugestao) { perguntar(d.sugestao); return; }
+  if (el.getAttribute("href") === "#teleconsulta") { estado.agendado = null; estado.horario = null; }
+});
+document.addEventListener("change", (ev) => { if (ev.target.id === "regiao-serv") { estado.regiaoServ = ev.target.value; estado.selecionado = null; render(); } });
+document.addEventListener("submit", (ev) => { if (ev.target.id === "form-chat") { ev.preventDefault(); const t = $("#pergunta").value; perguntar(t); } });
+
+render();
+</script>
