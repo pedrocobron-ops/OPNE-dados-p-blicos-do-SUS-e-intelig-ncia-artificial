@@ -17,8 +17,9 @@ RAIZ = Path(__file__).resolve().parents[1]
 AQUI = Path(__file__).resolve().parent
 COD_SP = 355030
 COD_SP7 = "3550308"
-# Mesma correção do pôster: coordenada do CNES fora do município, corrigida pelo endereço.
-CORRECOES = {"9014721": (-23.4729721, -46.6884893)}
+# Mesmas correções do pôster (data/processed/correcoes_coordenadas.csv).
+_corr = pd.read_csv(RAIZ / "data/processed/correcoes_coordenadas.csv", dtype={"cnes": str})
+CORRECOES = {r.cnes.zfill(7): (r.lat, r.lon) for r in _corr.itertuples()}
 
 # Caixa de projeção do SVG (lon/lat -> x/y), com cos(lat) para manter proporção.
 LON0, LON1, LAT0, LAT1 = -46.83, -46.36, -24.01, -23.35
@@ -87,15 +88,27 @@ def main() -> None:
             "lat": round(lat, 5), "lon": round(lon, 5), "x": x, "y": y,
         })
     for _, r in hosp.iterrows():
-        x, y = xy(r.NU_LATITUDE, r.NU_LONGITUDE)
+        lat, lon = CORRECOES.get(r.cnes.zfill(7), (r.NU_LATITUDE, r.NU_LONGITUDE))
+        x, y = xy(lat, lon)
         servicos.append({
             "id": r.cnes.zfill(7), "tipo": "hospital", "nome": titulo(r.NO_FANTASIA),
             "internacoes": int(r.internacoes),
             "endereco": f"{titulo(r.NO_LOGRADOURO)}, {r.NU_ENDERECO}",
             "bairro": titulo(r.NO_BAIRRO), "telefone": telefone(r.NU_TELEFONE),
-            "lat": round(r.NU_LATITUDE, 5), "lon": round(r.NU_LONGITUDE, 5), "x": x, "y": y,
+            "lat": round(lat, 5), "lon": round(lon, 5), "x": x, "y": y,
         })
-    assert sum(s["tipo"] == "ceo" for s in servicos) == 30
+    # Lista da Prefeitura (out/2026): 31º CEO, faculdades e ONGs (fontes institucionais, nov/2026)
+    extra = pd.read_csv(RAIZ / "data/processed/locais_complementares_sp.csv")
+    for _, r in extra.iterrows():
+        x, y = xy(r.lat, r.lon)
+        servicos.append({
+            "id": "x-" + str(len(servicos)), "tipo": r.tipo, "nome": r.nome,
+            "porte": "CEO" if r.tipo == "ceo" else None, "rcpd": False,
+            "endereco": r.endereco, "bairro": r.bairro, "telefone": r.telefone,
+            "obs": r.observacao, "fonte": r.fonte,
+            "lat": round(r.lat, 5), "lon": round(r.lon, 5), "x": x, "y": y,
+        })
+    assert sum(s["tipo"] == "ceo" for s in servicos) == 31
     assert sum(s["tipo"] == "hospital" for s in servicos) == 19
 
     caminho, w, h = contorno()

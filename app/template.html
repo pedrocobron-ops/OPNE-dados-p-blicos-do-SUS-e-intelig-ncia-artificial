@@ -9,7 +9,7 @@
   --bg: #F1F5F4; --surface: #FFFFFF; --ink: #15302F; --muted: #4C6462; --line: #D3DFDD;
   --teal: #0F6E6E; --teal-ink: #FFFFFF; --teal-weak: #DCEDEB;
   --amber: #C9730F; --amber-weak: #FBEAD3;
-  --red: #A8261E; --red-weak: #FBE3E1;
+  --red: #A8261E; --red-weak: #FBE3E1; --fac: #3F7FB0; --ong: #9B3468;
   --font: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --nav-h: 64px;
 }
@@ -17,12 +17,12 @@
   --bg: #0E1918; --surface: #162524; --ink: #E4EFEE; --muted: #9BB2B0; --line: #29403E;
   --teal: #4DB3AC; --teal-ink: #062120; --teal-weak: #173836;
   --amber: #F0A847; --amber-weak: #3A2A12;
-  --red: #F2B8B5; --red-weak: #3D1C1A; color-scheme: dark } }
+  --red: #F2B8B5; --red-weak: #3D1C1A; --fac: #7FB4DC; --ong: #E08AB5; color-scheme: dark } }
 :root[data-theme="dark"] {
   --bg: #0E1918; --surface: #162524; --ink: #E4EFEE; --muted: #9BB2B0; --line: #29403E;
   --teal: #4DB3AC; --teal-ink: #062120; --teal-weak: #173836;
   --amber: #F0A847; --amber-weak: #3A2A12;
-  --red: #F2B8B5; --red-weak: #3D1C1A; color-scheme: dark }
+  --red: #F2B8B5; --red-weak: #3D1C1A; --fac: #7FB4DC; --ong: #E08AB5; color-scheme: dark }
 
 * { box-sizing: border-box; }
 body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 17px; line-height: 1.45; }
@@ -101,6 +101,8 @@ a { color: var(--teal); }
 .mapa .cidade { fill: var(--teal-weak); stroke: var(--teal); stroke-width: 3; }
 .mapa .p-ceo { fill: var(--teal); stroke: var(--surface); stroke-width: 3; }
 .mapa .p-ceo.sem { fill: var(--surface); stroke: var(--teal); stroke-width: 4; }
+.mapa .p-fac { fill: var(--fac); stroke: var(--surface); stroke-width: 3; }
+.mapa .p-ong { fill: var(--ong); stroke: var(--surface); stroke-width: 3; }
 .mapa .p-hosp { fill: var(--amber); stroke: var(--surface); stroke-width: 3; }
 .mapa .voce { fill: var(--red); stroke: var(--surface); stroke-width: 4; }
 .mapa .sel { stroke: var(--ink); stroke-width: 6; }
@@ -158,7 +160,7 @@ nav.barra a[aria-current="page"] { color: var(--teal); }
   </header>
 
   <main id="conteudo"></main>
-  <p class="rodape">Dados: CNES (set/2026) e SIH/SUS (set/2025–ago/2026), município de São Paulo. Regras de orientação em validação pela equipe clínica.</p>
+  <p class="rodape">Dados: CNES (set/2026), SIH/SUS (set/2025–ago/2026), Prefeitura de São Paulo (out/2026) e sites institucionais (nov/2026). Regras de orientação em validação pela equipe clínica.</p>
 </div>
 
 <nav class="barra" aria-label="Navegação principal">
@@ -231,9 +233,9 @@ const NIVEIS = {
   n1: { etiqueta: "Atenção básica", titulo: "Comece pela Unidade Básica de Saúde (UBS)",
     texto: "A equipe de saúde bucal da UBS faz a consulta, a limpeza e o acompanhamento. Se for preciso um tratamento especializado, ela encaminha para o Centro de Especialidades Odontológicas (CEO).",
     caminho: ["UBS: consulta e cuidados de rotina", "Se precisar: encaminhamento ao CEO com atendimento à pessoa com deficiência", "Casos que não podem ser tratados acordados: hospital"], voce: 0 },
-  n2: { etiqueta: "Atenção especializada", titulo: "O caso indica um CEO da Rede de Cuidados à Pessoa com Deficiência",
-    texto: "Esses centros têm estrutura e equipe para atender pessoas com deficiência. O acesso é por encaminhamento: peça na UBS o encaminhamento para um CEO com atendimento a pacientes com necessidades especiais.",
-    caminho: ["UBS: peça o encaminhamento", "CEO da Rede de Cuidados à Pessoa com Deficiência", "Se não for possível tratar acordado: CEO encaminha ao hospital"], voce: 1 },
+  n2: { etiqueta: "Atenção especializada", titulo: "O caso indica um Centro de Especialidades Odontológicas (CEO)",
+    texto: "Os 31 CEO da cidade de São Paulo atendem pacientes com necessidades especiais. O acesso é por encaminhamento: peça na UBS o encaminhamento para o CEO, informando a condição do paciente.",
+    caminho: ["UBS: peça o encaminhamento", "CEO: atendimento a pacientes com necessidades especiais", "Se não for possível tratar acordado: CEO encaminha ao hospital"], voce: 1 },
   n3: { etiqueta: "Atenção hospitalar", titulo: "O caso pode precisar de tratamento sob anestesia geral",
     texto: "Quando o tratamento não é possível na cadeira, ele é feito em hospital, com o paciente sedado. O acesso é pelo encaminhamento do CEO, por meio da regulação. Leve ao CEO o histórico das tentativas anteriores.",
     caminho: ["CEO: avaliação e pedido de tratamento hospitalar", "Regulação do SUS: agendamento", "Hospital: tratamento sob anestesia geral"], voce: 0 },
@@ -252,15 +254,17 @@ const xy = (p) => ({ x: (p.lon - PROJ.lon0) * PROJ.cos * PROJ.esc, y: (PROJ.lat1
 
 function ordenados(regiao, filtro) {
   const ref = REGIOES[regiao];
-  return SERVICOS.filter((s) => filtro === "todos" || (filtro === "rcpd" && s.tipo === "ceo" && s.rcpd) || (filtro === "hospital" && s.tipo === "hospital"))
+  return SERVICOS.filter((s) => filtro === "todos" || (filtro === "rcpd" && s.tipo === "ceo") || (filtro === "hospital" && s.tipo === "hospital") || (filtro === "outros" && (s.tipo === "faculdade" || s.tipo === "ong")))
     .map((s) => ({ ...s, km: distKm(ref, s) }))
     .sort((a, b) => filtro === "hospital" ? b.internacoes - a.internacoes : a.km - b.km);
 }
 
 function cartao(s, extra = "") {
   const tags = s.tipo === "ceo"
-    ? `<span class="tag">${esc(s.porte)}</span>${s.rcpd ? '<span class="tag">Rede da Pessoa com Deficiência</span>' : '<span class="tag amb">Fora da Rede da Pessoa com Deficiência</span>'}`
-    : `<span class="tag amb">Hospital</span><span class="tag">${s.internacoes} tratamentos sob anestesia/ano</span>`;
+    ? `<span class="tag">${esc(s.porte)}</span><span class="tag">Atende pacientes com necessidades especiais</span>`
+    : s.tipo === "hospital"
+    ? `<span class="tag amb">Hospital</span><span class="tag">${s.internacoes} tratamentos sob anestesia/ano</span>`
+    : `<span class="tag amb">${s.tipo === "faculdade" ? "Faculdade (clínica-escola)" : "ONG"}</span>`;
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${s.lat},${s.lon}`;
   return `<article class="servico ${estado.selecionado === s.id ? "ativo" : ""}" id="s-${s.id}">
     <div class="linha1"><h3>${esc(s.nome)}</h3>${s.km != null ? `<span class="dist">${s.km.toFixed(1).replace(".", ",")} km</span>` : ""}</div>
@@ -268,6 +272,7 @@ function cartao(s, extra = "") {
     <p class="pequeno muted">${esc(s.endereco)} · ${esc(s.bairro)}</p>
     ${s.telefone ? `<p class="pequeno">Telefone: <strong>${esc(s.telefone)}</strong></p>` : ""}
     ${s.tipo === "hospital" ? '<p class="pequeno muted">Acesso somente por encaminhamento do CEO, via regulação.</p>' : ""}
+    ${s.obs && s.tipo !== "ceo" ? `<p class="pequeno muted">${esc(s.obs)}. <a href="${esc(s.fonte)}" target="_blank" rel="noopener">Fonte</a></p>` : ""}
     <div class="acoes"><a class="btn btn-borda" href="${mapsUrl}" target="_blank" rel="noopener">Como chegar</a>${extra}</div>
   </article>`;
 }
@@ -275,12 +280,14 @@ function cartao(s, extra = "") {
 function mapaSvg(lista, regiao) {
   const ref = xy(REGIOES[regiao]);
   const pts = lista.map((s) => s.tipo === "ceo"
-    ? `<circle class="p-ceo ${s.rcpd ? "" : "sem"} ${estado.selecionado === s.id ? "sel" : ""}" cx="${s.x}" cy="${s.y}" r="11" data-id="${s.id}"><title>${esc(s.nome)}</title></circle>`
+    ? `<circle class="p-ceo ${estado.selecionado === s.id ? "sel" : ""}" cx="${s.x}" cy="${s.y}" r="11" data-id="${s.id}"><title>${esc(s.nome)}</title></circle>`
+    : s.tipo === "faculdade" || s.tipo === "ong"
+    ? `<path class="${s.tipo === "ong" ? "p-ong" : "p-fac"} ${estado.selecionado === s.id ? "sel" : ""}" d="M${s.x},${s.y - 15} L${s.x + 14},${s.y + 11} L${s.x - 14},${s.y + 11} Z" data-id="${s.id}"><title>${esc(s.nome)}</title></path>`
     : `<rect class="p-hosp ${estado.selecionado === s.id ? "sel" : ""}" x="${s.x - 10}" y="${s.y - 10}" width="20" height="20" transform="rotate(45 ${s.x} ${s.y})" data-id="${s.id}"><title>${esc(s.nome)}</title></rect>`).join("");
   return `<div class="mapa"><svg viewBox="${VIEWBOX}" role="img" aria-label="Mapa do município de São Paulo com os serviços">
     <path class="cidade" d="${CONTORNO}"/>${pts}
     <circle class="voce" cx="${ref.x}" cy="${ref.y}" r="13"><title>Sua região</title></circle></svg>
-    <div class="legenda"><span><i style="background:var(--teal)"></i>CEO na Rede</span><span><i style="border:2px solid var(--teal)"></i>CEO fora da Rede</span><span><i style="background:var(--amber);border-radius:2px"></i>Hospital</span><span><i style="background:var(--red)"></i>Sua região</span></div></div>`;
+    <div class="legenda"><span><i style="background:var(--teal)"></i>CEO</span><span><i style="background:var(--amber);border-radius:2px"></i>Hospital</span><span><i style="background:var(--fac);border-radius:0"></i>Faculdade</span><span><i style="background:var(--ong);border-radius:0"></i>ONG</span><span><i style="background:var(--red)"></i>Sua região</span></div></div>`;
 }
 
 /* ---------- Telas ---------- */
@@ -297,7 +304,7 @@ function telaInicio() {
       <div class="casos">${CASOS.map((c, i) => `<button class="caso" data-caso="${i}"><strong>${esc(c.nome)}</strong><span class="pequeno muted">${esc(c.desc)}</span></button>`).join("")}</div>
     </div>
     <div class="atalhos">
-      <a class="atalho" href="#servicos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><strong>Serviços perto de você</strong><span class="pequeno muted">30 CEO e 19 hospitais</span></a>
+      <a class="atalho" href="#servicos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><strong>Serviços perto de você</strong><span class="pequeno muted">31 CEO, 19 hospitais, faculdades e ONG</span></a>
       <a class="atalho" href="#cuidados"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 3c-2.5 0-4 2-4 4.5 0 3 1.2 5 2 8 .5 2 1 5.5 2.5 5.5s1.5-4 3.5-4 2 4 3.5 4 2-3.5 2.5-5.5c.8-3 2-5 2-8C20 5 18.5 3 16 3c-1.6 0-2.6 1-4 1S9.6 3 8 3z"/></svg><strong>Cuidados em casa</strong><span class="pequeno muted">Escovação e prevenção</span></a>
     </div>
   </section>`;
@@ -320,7 +327,7 @@ function telaResultado() {
   const r = estado.resp, n = nivel(r), info = NIVEIS[n];
   const filtro = n === "n3" ? "hospital" : "rcpd";
   const lista = ordenados(r.regiao, filtro).slice(0, 3);
-  const titulo = n === "n3" ? "Hospitais que mais realizam esse tratamento" : `CEO da Rede mais próximos (${REGIOES[r.regiao].nome})`;
+  const titulo = n === "n3" ? "Hospitais que mais realizam esse tratamento" : `CEO mais próximos (${REGIOES[r.regiao].nome})`;
   return `<section class="tela">
     ${estado.caso != null ? `<div class="aviso"><strong>Caso de exemplo:</strong> ${esc(CASOS[estado.caso].nome)} — ${esc(CASOS[estado.caso].desc)}</div>` : ""}
     <div class="nivel ${n}"><span class="etiqueta">${info.etiqueta}</span><h2>${info.titulo}</h2><p>${info.texto}</p></div>
@@ -339,7 +346,7 @@ function telaResultado() {
 
 function telaServicos() {
   const lista = ordenados(estado.regiaoServ, estado.filtro);
-  const chips = [["rcpd", "CEO da Rede (28)"], ["hospital", "Hospitais (19)"], ["todos", "Todos (49)"]];
+  const chips = [["rcpd", "CEO (31)"], ["hospital", "Hospitais (19)"], ["outros", "Faculdades e ONGs (4)"], ["todos", "Todos (54)"]];
   return `<section class="tela">
     <h1>Serviços na cidade de São Paulo</h1>
     <div class="filtros" role="group" aria-label="Filtrar serviços">${chips.map(([v, t]) => `<button class="chip" data-filtro="${v}" aria-pressed="${estado.filtro === v}">${t}</button>`).join("")}</div>
@@ -402,7 +409,8 @@ let sample = null, ctl = null;
 (async () => { try { sample = window.claude ? await window.claude.use("sample") : null; } catch { sample = null; } })();
 
 function regrasAssistente() {
-  const ceos = SERVICOS.filter((s) => s.tipo === "ceo").map((s) => `- ${s.nome} (${s.porte}${s.rcpd ? ", Rede da Pessoa com Deficiência" : ", fora da Rede"}): ${s.endereco}, ${s.bairro}. Tel. ${s.telefone || "não informado"}`).join("\n");
+  const ceos = SERVICOS.filter((s) => s.tipo === "ceo").map((s) => `- ${s.nome} (${s.porte}): ${s.endereco}, ${s.bairro}. Tel. ${s.telefone || "não informado"}`).join("\n");
+  const outros = SERVICOS.filter((s) => s.tipo === "faculdade" || s.tipo === "ong").map((s) => `- ${s.nome} (${s.tipo === "ong" ? "ONG" : "faculdade"}): ${s.endereco}, ${s.bairro}. Tel. ${s.telefone}. ${s.obs}`).join("\n");
   const hosp = SERVICOS.filter((s) => s.tipo === "hospital").map((s) => `- ${s.nome}: ${s.internacoes} tratamentos sob anestesia geral/ano. ${s.endereco}, ${s.bairro}`).join("\n");
   return `Você é o assistente do protótipo "Porta Certa", que orienta famílias e cuidadores de pessoas com deficiência a encontrar atendimento odontológico no SUS, no município de São Paulo.
 Regras:
@@ -414,8 +422,11 @@ Regras:
 - Lembre, quando fizer sentido, que a teleconsulta do app com um dentista confirma o caminho.
 - Este é um protótipo: as orientações estão em validação pela equipe clínica.
 
-CEO no município de São Paulo:
+CEO no município de São Paulo (todos os 31 atendem pacientes com necessidades especiais, segundo a Prefeitura):
 ${ceos}
+
+Faculdades e ONG com atendimento odontológico a pessoas com deficiência (não substituem a rede do SUS; costumam ter triagem e lista de espera):
+${outros}
 
 Hospitais que realizaram tratamento odontológico sob anestesia geral (set/2025–ago/2026):
 ${hosp}`;
@@ -469,7 +480,7 @@ function ir(view) { if (location.hash.slice(1) === view) render(); else location
 
 window.addEventListener("hashchange", () => { render(); window.scrollTo(0, 0); });
 document.addEventListener("click", (ev) => {
-  const el = ev.target.closest("button, a, circle, rect");
+  const el = ev.target.closest("button, a, circle, rect, path[data-id]");
   if (!el) return;
   const d = el.dataset;
   if (d.caso != null) { const c = CASOS[+d.caso]; estado.resp = { ...c.resp }; estado.caso = +d.caso; estado.resultado = true; estado.passo = PERGUNTAS.length - 1; ir("orientacao"); return; }
@@ -479,7 +490,7 @@ document.addEventListener("click", (ev) => {
   if (d.acao === "avancar") { if (estado.passo < PERGUNTAS.length - 1) estado.passo++; else { estado.resultado = true; estado.caso = null; } render(); window.scrollTo(0, 0); return; }
   if (d.filtro && el.tagName === "BUTTON") { estado.filtro = d.filtro; estado.selecionado = null; render(); return; }
   if (d.filtro && el.tagName === "A") { estado.filtro = d.filtro; estado.regiaoServ = d.regiao || estado.regiaoServ; estado.selecionado = null; return; }
-  if (d.id && (el.tagName === "circle" || el.tagName === "rect")) { estado.selecionado = d.id; render(); const c = document.getElementById("s-" + d.id); if (c) c.scrollIntoView({ block: "center", behavior: "smooth" }); return; }
+  if (d.id && (el.tagName === "circle" || el.tagName === "rect" || el.tagName === "path")) { estado.selecionado = d.id; render(); const c = document.getElementById("s-" + d.id); if (c) c.scrollIntoView({ block: "center", behavior: "smooth" }); return; }
   if (d.horario) { estado.horario = d.horario; render(); return; }
   if (d.acao === "agendar") { estado.agendado = estado.horario; render(); window.scrollTo(0, 0); return; }
   if (d.sugestao) { perguntar(d.sugestao); return; }

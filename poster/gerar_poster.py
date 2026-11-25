@@ -78,11 +78,11 @@ def secao(slide, x, y, w, titulo):
     return y + 0.55
 
 
-def texto(slide, x, y, w, h, blocos):
+def texto(slide, x, y, w, h, blocos, depois=2):
     """blocos: lista de parágrafos; cada parágrafo é lista de (texto, kwargs)."""
     tf = caixa(slide, x, y, w, h)
     for i, partes in enumerate(blocos):
-        p = paragrafo(tf, i == 0)
+        p = paragrafo(tf, i == 0, depois=depois)
         for t, kw in partes:
             run(p, t, **kw)
     return y + h
@@ -188,13 +188,13 @@ def coluna_esquerda(slide):
     y = secao(slide, X1, y, COL, "METODOLOGIA")
     y = texto(slide, X1, y, COL, 4.5, [
         [("Levantamento preliminar no município de São Paulo, com apoio de IA na coleta, "
-          "integração e detecção de inconsistências, em três bases públicas:", {})],
+          "integração e detecção de inconsistências, em fontes públicas:", {})],
         [("• CNES ", {"negrito": True}), ("(09/2026): Centros de Especialidades Odontológicas (CEO) "
           "e adesão à Rede de Cuidados à Pessoa com Deficiência (RCPD);", {})],
         [("• SIH/SUS ", {"negrito": True}), ("(09/2025 a 08/2026): internações pelo procedimento "
           "04.14.02.041-3, tratamento odontológico para pacientes com necessidades especiais;", {})],
         [("• Censo 2022 ", {"negrito": True}), ("(IBGE): população com deficiência.", {})],
-        [("A contagem de CEO foi conferida com a base do Ministério da Saúde.", {})],
+        [("• Prefeitura de SP ", {"negrito": True}), ("(10/2026): lista dos 31 CEO; sites de faculdades e ONGs.", {})],
     ]) + 0.1
 
     y = secao(slide, X1, y, COL, "PLATAFORMA PROPOSTA")
@@ -228,16 +228,16 @@ def coluna_direita(slide):
     indicador(slide, X2, y, w2, hk, "719.261", "pessoas com deficiência")
     indicador(slide, X2 + w2 + 0.2, y, w2, hk, "42.329", "crianças de 2 a 14 anos")
     y += hk + 0.2
-    indicador(slide, X2, y, w2, hk, "28", "CEO com adesão à RCPD")
+    indicador(slide, X2, y, w2, hk, "31", "CEO com atendimento a PNE")
     indicador(slide, X2 + w2 + 0.2, y, w2, hk, "25.688", "PcD por CEO da RCPD")
     y += hk + 0.25
 
     tf = caixa(slide, X2, y, COL, 0.4)
-    run(paragrafo(tf, True, PP_ALIGN.LEFT, 0), "Figura 1. Localização dos CEO e dos hospitais",
+    run(paragrafo(tf, True, PP_ALIGN.LEFT, 0), "Figura 1. Onde há atendimento odontológico a PcD",
         8, True, MARINHO)
     y += 0.4
     slide.shapes.add_picture(str(AQUI / "fig_mapa.png"), Cm(X2), Cm(y), width=Cm(COL))
-    y += 6.9 + 0.2
+    y += 7.3 + 0.2
 
     tf = caixa(slide, X2, y, COL, 0.8)
     p = paragrafo(tf, True, PP_ALIGN.LEFT, 0)
@@ -258,14 +258,16 @@ def conclusoes(slide, y):
          "abrangência nacional, o modelo pode ser expandido ao estado e replicado no Brasil a baixo custo.",
          {})]]) + 0.1
     y = secao(slide, X1, y, LARGURA, "REFERÊNCIAS")
-    texto(slide, X1, y, LARGURA, 1.2, [
+    texto(slide, X1, y, LARGURA, 1.6, [
         [("1. Brasil. Ministério da Saúde. CNES. Disponível em: cnes.datasus.gov.br. Acesso em: out. 2026.",
           {"tam": 8})],
         [("2. Brasil. Ministério da Saúde. SIH/SUS – TabNet. Disponível em: tabnet.datasus.gov.br. "
           "Acesso em: out. 2026.", {"tam": 8})],
         [("3. IBGE. Censo Demográfico 2022: pessoas com deficiência (SIDRA, tabela 10125). Acesso em: out. 2026.",
           {"tam": 8})],
-    ])
+        [("4. São Paulo (Município). SMS. Relação dos estabelecimentos da SMS, out. 2026. Acesso em: nov. 2026.",
+          {"tam": 8})],
+    ], depois=0)
 
 
 def main() -> None:
@@ -274,7 +276,7 @@ def main() -> None:
     cabecalho(slide)
     coluna_esquerda(slide)
     coluna_direita(slide)
-    conclusoes(slide, 22.55)
+    conclusoes(slide, 22.45)
     prs.save(str(SAIDA))
     print(f"salvo: {SAIDA.name}")
 

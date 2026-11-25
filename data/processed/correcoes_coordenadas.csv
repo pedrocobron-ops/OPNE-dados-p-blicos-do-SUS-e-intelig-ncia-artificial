@@ -1,0 +1,6 @@
+cnes,nome,lat_cnes,lon_cnes,lat,lon,motivo
+9014721,CEO II Freguesia do Ó/Brasilândia,-23.325,-46.681,-23.4729721,-46.6884893,"CNES fora do município; endereço (CEP 02842-260, ViaCEP) geocodificado no OpenStreetMap"
+7988176,CEO II Santana,-23.549,-46.631,-23.4822351,-46.6134092,"CNES no marco zero (Praça da Sé), valor padrão; endereço Av. Nova Cantareira, 1467 geocodificado no OpenStreetMap"
+9026525,CEO I Vila Mariana,-23.5477,-46.63498,-23.594592,-46.633741,"CNES no marco zero (Praça da Sé), valor padrão; endereço R. São Samuel, 70 geocodificado no OpenStreetMap"
+9144161,CEO II Vera Cruz M'Boi Mirim,-23.5505199,-46.6333094,-23.7332736,-46.7834207,"CNES no marco zero (Praça da Sé), valor padrão; endereço Av. dos Funcionários Públicos, 379 geocodificado no OpenStreetMap"
+2786680,Hosp. Mun. Fernando Mauro Pires da Rocha (Campo Limpo),-23.5329,-46.759682,-23.6490957,-46.7490028,"CNES a 13 km do endereço; endereço geocodificado no OpenStreetMap (Campo Limpo)"
